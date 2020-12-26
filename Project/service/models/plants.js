@@ -1,20 +1,20 @@
 const { Schema, model } = require('mongoose');
 
+const wayOfCareSchema = new Schema({
+    light: {type: String},
+    water: {type: String},
+    feed: {type: String},
+    temperature: {type: String}
+});
+
 const plantSchema = new Schema({
     id: { type: Number, required: true },
-    common_name: {type: String, required: true},
-    slug: { type: String },
-    scientific_name: {type: String},
-    year: {type: Number},
-    bibliography: { type: String, required: true},
-    author: { type: String, required: true},
-    status: { type: String, required: true},
-    rank: { type: String, required: true},
-    family_common_name: { type: String, required: true},
-    kind_id: {type: Number},
+    name: {type: String, required: true},
+    specie: { type: String },
     image_url: {type:String, required: true},
-    kind: { type: String, required: true},
-    family: { type: String, required: true}
+    family: { type: String, required: true},
+    description: {type: String},
+    way_of_care: [wayOfCareSchema]
 }, { collection: 'plants'});
 
 

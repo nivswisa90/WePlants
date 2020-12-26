@@ -3,90 +3,84 @@
         "id": 1,
         "name": "Philodendron Monkey Mask",
         "specie": "Monstera adansonii",
-        "family_name": "Monstera family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Monstera-adansonii-Philodendron-Monkey-Mask-Large_5000x.jpg?v=1569156354",
         "family": "Philodendron",
         "description": "Monkey Mask is a variety of Swiss Cheese Vine, this vine will grow long tendrils and can be left to trail down from a hanging pot or shelf, or trained up a trellace or moss pole. Either way, the stunning foliage makes for a dramatic statement",
         "way_of_care": {
-            "Light": "indirect light but will tolerate moderate shade",
-            "Water": "Water when the soil has started to dry out",
-            "Feed": "Feed once a month with a balanced fertiliser during the growing period",
-            "Temperature": "Monstera like warm conditions from 18-27°C"
+            "light": "indirect light but will tolerate moderate shade",
+            "water": "water when the soil has started to dry out",
+            "feed": "feed once a month with a balanced fertiliser during the growing period",
+            "temperature": "Monstera like warm conditions from 18-27°C"
         }
     },
     {
         "id": 2,
         "name": "Chinese Evergreen",
         "specie": "Aglaonema Christina",
-        "family_name": "Aglaonema family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Aglaonema-Christina-Chinese-Evergreen_5000x.jpg?v=1582561239",
         "family": "Aglaonema",
         "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office.",
         "way_of_care": {
-            "Light": "Aglaonema will thrive in low to bright light levels",
-            "Water": "Keep the soil moist at all times, do not allow it to dry out",
-            "Feed": "Slow release fertiliser once a month during the growing season",
-            "Temperature": "Normal room temperature 18-24°C, however avoid cold draughts"
+            "light": "Aglaonema will thrive in low to bright light levels",
+            "water": "Keep the soil moist at all times, do not allow it to dry out",
+            "feed": "Slow release fertiliser once a month during the growing season",
+            "temperature": "Normal room temperature 18-24°C, however avoid cold draughts"
         }
     },
     {
         "id": 3,
         "name": "Elephant Ear",
         "specie": "Alocasia amazonica Polly",
-        "family_name": "Alocasia family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Alocasia-amazonica-Polly-Elephant-Ear_941f9e9b-ed40-488c-b41e-b561353cf4b6_5000x.jpg?v=1568845670",
         "family": "Aglaonema",
         "description": "A gorgeous plant with stunning dark green leaves that really make the deep silver-white veins stand out. The leaves can grow to an astounding 30cm in length, adding a contemporary design quality to indoor spaces.",
         "way_of_care": {
-            "Light": "Thrives best in well lit, bright conditions, however direct sunlight will scorch the leaves",
-            "Water": "Keep the compost moist with warm water. Do not allow the soil to dry out, do not allow it to dry out",
-            "Feed": "Apply a slow release fertiliser once a month during the growing season",
-            "Temperature": "Needs to be kept warm, ideally between 18-22°C"
+            "light": "Thrives best in well lit, bright conditions, however direct sunlight will scorch the leaves",
+            "water": "Keep the compost moist with warm water. Do not allow the soil to dry out, do not allow it to dry out",
+            "feed": "Apply a slow release fertiliser once a month during the growing season",
+            "temperature": "Needs to be kept warm, ideally between 18-22°C"
         }
     },
     {
         "id": 4,
         "name": "Calathea Flamestar",
         "specie": "Calathea",
-        "family_name": "Calathea family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Calathea-Flamestar_5000x.jpg?v=1569061335",
         "family": "variegated plants",
         "description": "The rich bold green and yellow markings of Calathea Flamestar make this a must-have houseplant to brighten up any room",
         "way_of_care": {
-            "Light": "As with most variegated plants, Calathea need plenty of diffused light however direct sunlight will cause the leaves to fade and lose their markings. They can tolerate some degree of shade, but the better the light conditions, the more you will be rewarded by fine foliage",
-            "Water": " Calathea must be kept in damp soil at all times, but definitely do not allow the plant to sit in water or in very wet soil. Think little and often as a watering policy",
-            "Feed": "Apply a weak dose of a nitrogen rich foliage fertiliser once or twice a month during the growing season",
-            "Temperature": "Prefers warm to high temperatures, ideally between 18-23°C but can cope with as low as 15°C. Avoid draughts and ensure the plant has reasonable ventilation"
+            "light": "As with most variegated plants, Calathea need plenty of diffused light however direct sunlight will cause the leaves to fade and lose their markings. They can tolerate some degree of shade, but the better the light conditions, the more you will be rewarded by fine foliage",
+            "water": " Calathea must be kept in damp soil at all times, but definitely do not allow the plant to sit in water or in very wet soil. Think little and often as a watering policy",
+            "feed": "Apply a weak dose of a nitrogen rich foliage fertiliser once or twice a month during the growing season",
+            "temperature": "Prefers warm to high temperatures, ideally between 18-23°C but can cope with as low as 15°C. Avoid draughts and ensure the plant has reasonable ventilation"
         }
     },
     {
         "id": 5,
         "name": "Calathea picturata Crimson",
         "specie": "Calathea",
-        "family_name": "Calathea family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Calathea-picturata-Crimson_5000x.jpg?v=1581951046",
         "family": "variegated plants",
         "description": "Calathea Crimson is a stunning Calathea variety. Deep pink centered leaves with a deep green-black border. Please note: Calathea Crimson is only available for sale during the spring and summer months.",
         "way_of_care": {
-            "Light": "As with most variegated plants, Calathea need plenty of diffused light however direct sunlight will cause the leaves to fade and lose their markings. They can tolerate some degree of shade, but the better the light conditions, the more you will be rewarded by fine foliage. Experiment in your home to find the perfect spot for your plant",
-            "Water": "Calathea must be kept in damp soil at all times, but definitely do not allow the plant to sit in water or in very wet soil. Think little and often as a watering policy",
-            "Feed": "Apply a weak dose of a nitrogen rich foliage fertiliser once or twice a month during the growing season",
-            "Temperature": "Prefers warm to high temperatures, ideally between 18-23°C but can cope with as low as 15°C. Avoid draughts and ensure the plant has reasonable ventilation"
+            "light": "As with most variegated plants, Calathea need plenty of diffused light however direct sunlight will cause the leaves to fade and lose their markings. They can tolerate some degree of shade, but the better the light conditions, the more you will be rewarded by fine foliage. Experiment in your home to find the perfect spot for your plant",
+            "water": "Calathea must be kept in damp soil at all times, but definitely do not allow the plant to sit in water or in very wet soil. Think little and often as a watering policy",
+            "feed": "Apply a weak dose of a nitrogen rich foliage fertiliser once or twice a month during the growing season",
+            "temperature": "Prefers warm to high temperatures, ideally between 18-23°C but can cope with as low as 15°C. Avoid draughts and ensure the plant has reasonable ventilation"
         }
     },
     {
         "id": 6,
         "name": "String of Hearts",
         "specie": "Ceropegia woodii",
-        "family_name": "Ceropegia family",
         "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/String-Of-Hearts-Ceropegia-Woodii_5000x.jpg?v=1569063374",
         "family": "variegated plants",
         "description": "Ceropegia woodii ssp. Woodii has small heart shaped leaves with a delightful green lace pattern that grow in opposite pairs along a trailing vine. The pinkish-purple undersides of the leaves and stems add a romantic hue.Also known as Rosary Vine or Chain of Hearts, Ceropegia woodii is not truly a succulent, but it does store water in its stems and plant care is very similar to that of a succulent. String of Hearts is extremely easy to look after and very tolerant of neglect. It is a perfect plant for for hanging baskets.",
         "way_of_care": {
-            "Light": "Bright light, including some direct early morning or evening sunlight, will enhance the colour",
-            "Water": "Drought tolerant, but for best results keep the soil lightly moist. Water sparingly in winte",
-            "Feed": "A weak solution of balanced fertiliser once a month during summer",
-            "Temperature": "Normal room temperature anywhere between 18-24°C. Protect from draughts."
+            "light": "Bright light, including some direct early morning or evening sunlight, will enhance the colour",
+            "water": "Drought tolerant, but for best results keep the soil lightly moist. water sparingly in winte",
+            "feed": "A weak solution of balanced fertiliser once a month during summer",
+            "temperature": "Normal room temperature anywhere between 18-24°C. Protect from draughts."
         }
     }
 ]
