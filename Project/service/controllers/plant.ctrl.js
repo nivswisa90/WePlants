@@ -2,7 +2,7 @@ const { query } = require('express');
 const Plant = require('../models/plants');
 
 
- let plantID = 20;
+let plantID = 20;
 // let data;
 exports.plantDBController = {
 
@@ -35,31 +35,30 @@ exports.plantDBController = {
 
 },
 
-// addUser(req, res) {
-//     ++plantID;
-//     const newPlant = new Plant({
-//         "id": plantID,
-//         "common_name": req.body.common_name,
-//         "slug": req.body.slug,
-//         "scientific_name": req.body.scientific_name,
-//         "year": req.body.year,
-//         "bibliography": req.body.bibliography,
-//         "color": req.body.color,
-//         "job": req.body.job
-//     });
+addPlant(req, res) {
+    ++plantID;
+    const newPlant = new Plant({
+        "id": plantID,
+        "name": req.body.name,
+        "specie": req.body.specie,
+        "image_url": req.body.image_url,
+        "family": req.body.family,
+        "description": req.body.description,
+        "way_of_care": req.body.way_of_care
+    });
+    
 
-//     newUser.save()
-//         .then(docs => { res.json(docs) })
-//         .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    newPlant.save()
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
-// },
+},
 
-// updatUser(req, res) {
-
-//     User.updateOne({ id: parseInt(req.params.id) }, req.body)
-//         .then(docs => { res.json(docs) })
-//         .catch(err => console.log(`Error getting the data from DB: ${err}`));
-// },
+updatePlant(req, res) {
+    Plant.updateOne({ id: parseInt(req.params.id) }, req.body)
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+}
 
 // deleteUser(req, res) {
 //     User.findOneAndDelete({ id: parseInt(req.params.id) })
