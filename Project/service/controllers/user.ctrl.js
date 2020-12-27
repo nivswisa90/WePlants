@@ -1,46 +1,49 @@
 const { query } = require('express');
-const Plant = require('../models/plants');
+const User = require('../models/user');
 
 
-let plantID = 7;//to check how to make it dynamic!!!!!!
+let userID = 7;//to check how to make it dynamic!!!!!!
 // let data;
-exports.plantDBController = {
+exports.userDBController = {
 
-    getPlants(req, res) {
+    getUsers(req, res) {
 
-        if (req.query.family) {
-            Plant.find({ family: `${req.query.family}` })
+        if (req.query.first_name) {
+            User.find({ first_name: `${req.query.first_name}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
         }
 
-        else if (req.query.name) {
-            Plant.find({ name: `${req.query.name}` })
+        else if (req.query.email) {
+            User.find({ email: `${req.query.email}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
 
         else{
-            Plant.find({})
+            User.find({})
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
     }
 },
 
-    getPlant(req, res) {
-    Plant.findOne({ id: parseInt(req.params.id) })
+    getUser(req, res) {
+    User.findOne({ id: parseInt(req.params.id) })
         .then(docs => { res.json(docs) })
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
 },
 
-addPlant(req, res) {
+addUser(req, res) {
 
-    ++plantID;
-    const newPlant = new Plant({
-        "id": plantID,
-        "name": req.body.name,
+    ++UserID;
+    const newUser = new User({
+        "id": UserID,
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "email": req.body.email,
+        // "password": nedd to check
         "specie": req.body.specie,
         "image_url": req.body.image_url,
         "family": req.body.family,
@@ -50,26 +53,26 @@ addPlant(req, res) {
     
    
                                          
-    newPlant.save()
+    newUser.save()
         .then(docs => { res.json(docs) })
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
 },
 
-// updatePlant(req, res) {
+// updateUser(req, res) {
 //     const toUpdate = req.body.way_of_care;
 //     [a,...rest] = [toUpdate];
 //     console.log(a);
 //     console.log(toUpdate);
-//     Plant.updateOne({ id: parseInt(req.params.id) },{$set: {...req.body}})
+//     User.updateOne({ id: parseInt(req.params.id) },{$set: {...req.body}})
 //         .then(docs => { res.json(docs) })
 //         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 // }
 
 
 
-deletePlant(req, res) {
-    Plant.findOneAndDelete({ id: parseInt(req.params.id) })
+deleteUser(req, res) {
+    User.findOneAndDelete({ id: parseInt(req.params.id) })
         .then(docs => { res.json(docs) })
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 }

@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const {plantRouter} = require("./routers/plantRouter");
+const {userRouter} = require("./routers/userRouter");
 // const fetch = require('node-fetch');
 
 // (async () => {
@@ -26,6 +27,7 @@ app.use((req,res,next) =>{
 });
 
 app.use('/api/plants', plantRouter);
+app.use('/api/plants', userRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

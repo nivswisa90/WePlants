@@ -11,12 +11,12 @@ const userSchema = new Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     email: {type: String, required: true},
-    password: {type: String, required: true},
+    // password: {type: String, required: true},
     myFavorites: [[favorites]],
 
-}, { collection: 'plants'});
+}, { collection: 'users'});
 
 
-const Plant = model('Plant', plantSchema);
+const User = model('User', userSchema);
 
-module.exports = Plant;
+module.exports = User;
