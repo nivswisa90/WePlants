@@ -2,7 +2,7 @@ const { query } = require('express');
 const Plant = require('../models/plants');
 
 
-let plantID = 20;
+let plantID = 7;//to check how to make it dynamic!!!!!!
 // let data;
 exports.plantDBController = {
 
@@ -36,6 +36,7 @@ exports.plantDBController = {
 },
 
 addPlant(req, res) {
+
     ++plantID;
     const newPlant = new Plant({
         "id": plantID,
@@ -47,23 +48,30 @@ addPlant(req, res) {
         "way_of_care": req.body.way_of_care
     });
     
-
+   
+                                         
     newPlant.save()
         .then(docs => { res.json(docs) })
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
 },
 
-updatePlant(req, res) {
-    Plant.updateOne({ id: parseInt(req.params.id) }, req.body)
+// updatePlant(req, res) {
+//     const toUpdate = req.body.way_of_care;
+//     [a,...rest] = [toUpdate];
+//     console.log(a);
+//     console.log(toUpdate);
+//     Plant.updateOne({ id: parseInt(req.params.id) },{$set: {...req.body}})
+//         .then(docs => { res.json(docs) })
+//         .catch(err => console.log(`Error getting the data from DB: ${err}`));
+// }
+
+
+
+deletePlant(req, res) {
+    Plant.findOneAndDelete({ id: parseInt(req.params.id) })
         .then(docs => { res.json(docs) })
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
 }
-
-// deleteUser(req, res) {
-//     User.findOneAndDelete({ id: parseInt(req.params.id) })
-//         .then(docs => { res.json(docs) })
-//         .catch(err => console.log(`Error getting the data from DB: ${err}`));
-// },
 };
 
