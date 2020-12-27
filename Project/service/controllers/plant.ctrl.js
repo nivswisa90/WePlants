@@ -56,15 +56,26 @@ addPlant(req, res) {
 
 },
 
-// updatePlant(req, res) {
-//     const toUpdate = req.body.way_of_care;
-//     [a,...rest] = [toUpdate];
-//     console.log(a);
-//     console.log(toUpdate);
-//     Plant.updateOne({ id: parseInt(req.params.id) },{$set: {...req.body}})
-//         .then(docs => { res.json(docs) })
-//         .catch(err => console.log(`Error getting the data from DB: ${err}`));
-// }
+updatePlant(req, res) {
+    const toUpdate = req.body.way_of_care;
+    let set = {$set:{}};
+    if(toUpdate.water !== null ) {
+        set.$set["way_of_care.water"] = toUpdate.water;
+    }
+    if(toUpdate.feed !== null) {
+        set.$set["way_of_care.feed"] = toUpdate.feed;
+    }
+    if(toUpdate.light !== null) {
+        set.$set["way_of_care.light"] = toUpdate.light;
+    }
+    if(toUpdate.temperature !== null) {
+        set.$set["way_of_care.temperature"] = toUpdate.temperature;
+    }
+    console.log(set);
+    Plant.updateOne({ id: parseInt(req.params.id) }, set)
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+},
 
 
 

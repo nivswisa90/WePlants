@@ -27,7 +27,7 @@ app.use((req,res,next) =>{
 });
 
 app.use('/api/plants', plantRouter);
-app.use('/api/plants', userRouter);
+app.use('/api/users', userRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

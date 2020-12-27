@@ -36,22 +36,15 @@ exports.userDBController = {
 },
 
 addUser(req, res) {
-
-    ++UserID;
+    ++userID;
     const newUser = new User({
-        "id": UserID,
+        "id": userID,
         "first_name": req.body.first_name,
         "last_name": req.body.last_name,
         "email": req.body.email,
-        // "password": nedd to check
-        "specie": req.body.specie,
-        "image_url": req.body.image_url,
-        "family": req.body.family,
-        "description": req.body.description,
-        "way_of_care": req.body.way_of_care
+        // "myFavorites": req.body.myFavorites
     });
     
-   
                                          
     newUser.save()
         .then(docs => { res.json(docs) })
