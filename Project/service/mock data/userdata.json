@@ -1,0 +1,636 @@
+[
+    {
+        "id": 1,
+        "first_name": "Jessy",
+        "last_name": "Parmeter",
+        "email": "jparmeter0@stanford.edu",
+        "password": "yZo4wHhJzuXc",
+        "myFavorites": [
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "first_name": "Munmro",
+        "last_name": "Lymer",
+        "email": "mlymer1@nyu.edu",
+        "password": "vZKNFL2G",
+        "myFavorites": [
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            },
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            },
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "Erica",
+        "last_name": "Popplewell",
+        "email": "epopplewell2@cdbaby.com",
+        "password": "pFpLAE",
+        "myFavorites": [
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            },
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            },
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "first_name": "Faunie",
+        "last_name": "Stare",
+        "email": "fstare3@wisc.edu",
+        "password": "2rDXA5rMg",
+        "myFavorites": [
+            {
+                "id": "1",
+                "plant_name": "Chinese Evergreen",
+                "description": " truly tropical gem, Aglaonema Christina has fresh, pale green central foliage with darker green leaf margins and central splashes. Great for improving air quality and easy to care for. Aglaonema Christina will add extra colour and texture to create a rain forest vibe at home or the office."
+            },
+            {}
+        ]
+    },
+    {
+        "id": 5,
+        "first_name": "Gian",
+        "last_name": "Hilary",
+        "email": "ghilary4@usnews.com",
+        "password": "QtJCO5MXUb",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 6,
+        "first_name": "Lloyd",
+        "last_name": "Gratrex",
+        "email": "lgratrex5@addtoany.com",
+        "password": "ZGOQ7ax9yho",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 7,
+        "first_name": "Harriott",
+        "last_name": "McGowan",
+        "email": "hmcgowan6@pinterest.com",
+        "password": "qygYbxnT2p8",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 8,
+        "first_name": "Sybilla",
+        "last_name": "Korneichuk",
+        "email": "skorneichuk7@usnews.com",
+        "password": "O6vC2pGY4FbC",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 9,
+        "first_name": "Kristal",
+        "last_name": "McCormick",
+        "email": "kmccormick8@google.com",
+        "password": "pEqzwBxiJo",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 10,
+        "first_name": "Brigg",
+        "last_name": "Heisler",
+        "email": "bheisler9@statcounter.com",
+        "password": "U4vNuSmmwhh",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 11,
+        "first_name": "Trstram",
+        "last_name": "Elwell",
+        "email": "telwella@canalblog.com",
+        "password": "SB1rCjIWbsHE",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 12,
+        "first_name": "Holmes",
+        "last_name": "Bickers",
+        "email": "hbickersb@cbslocal.com",
+        "password": "6YznUtZQOKj6",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 13,
+        "first_name": "Cherish",
+        "last_name": "Greenly",
+        "email": "cgreenlyc@kickstarter.com",
+        "password": "et3C0iMPcwR",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 14,
+        "first_name": "Kirby",
+        "last_name": "Jowle",
+        "email": "kjowled@hp.com",
+        "password": "6ugrclr2",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 15,
+        "first_name": "Brandy",
+        "last_name": "Rogeon",
+        "email": "brogeone@issuu.com",
+        "password": "qDTmp7",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 16,
+        "first_name": "Blakelee",
+        "last_name": "Caughtry",
+        "email": "bcaughtryf@bandcamp.com",
+        "password": "PAAbFKDFfgZ2",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 17,
+        "first_name": "Donaugh",
+        "last_name": "Whaley",
+        "email": "dwhaleyg@dedecms.com",
+        "password": "ftjKUCAF0Li",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 18,
+        "first_name": "Elton",
+        "last_name": "Wharfe",
+        "email": "ewharfeh@php.net",
+        "password": "i18fe0l",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 19,
+        "first_name": "Marlon",
+        "last_name": "Chilley",
+        "email": "mchilleyi@sciencedirect.com",
+        "password": "5ytzTE",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 20,
+        "first_name": "Alessandra",
+        "last_name": "Krysztowczyk",
+        "email": "akrysztowczykj@about.com",
+        "password": "d03iP8Ow6J0X",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 21,
+        "first_name": "Corrie",
+        "last_name": "Fury",
+        "email": "cfuryk@dropbox.com",
+        "password": "OAF3VSY",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 22,
+        "first_name": "Conway",
+        "last_name": "Korn",
+        "email": "ckornl@uol.com.br",
+        "password": "9DYatYjt9G4",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 23,
+        "first_name": "Denys",
+        "last_name": "Bartels",
+        "email": "dbartelsm@friendfeed.com",
+        "password": "KZfgkl",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 24,
+        "first_name": "Loraine",
+        "last_name": "Leonarde",
+        "email": "lleonarden@yolasite.com",
+        "password": "ODBLQ98oR",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 25,
+        "first_name": "Eveleen",
+        "last_name": "Kelly",
+        "email": "ekellyo@prnewswire.com",
+        "password": "woPYPShh",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 26,
+        "first_name": "Seana",
+        "last_name": "Korous",
+        "email": "skorousp@goo.ne.jp",
+        "password": "3dGmibkVoa",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 27,
+        "first_name": "Andras",
+        "last_name": "Kerbler",
+        "email": "akerblerq@cdc.gov",
+        "password": "objZtxeF",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 28,
+        "first_name": "Camey",
+        "last_name": "Burkett",
+        "email": "cburkettr@jiathis.com",
+        "password": "rc58nT6qRp0",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 29,
+        "first_name": "Samson",
+        "last_name": "Lismer",
+        "email": "slismers@themeforest.net",
+        "password": "0ktwmL",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 30,
+        "first_name": "Susanetta",
+        "last_name": "Cornner",
+        "email": "scornnert@samsung.com",
+        "password": "b53dL7peTez",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 31,
+        "first_name": "Charlotta",
+        "last_name": "McGillreich",
+        "email": "cmcgillreichu@wikispaces.com",
+        "password": "44icxdazM",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 32,
+        "first_name": "Burty",
+        "last_name": "Sinnatt",
+        "email": "bsinnattv@who.int",
+        "password": "zpTHFUilY",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 33,
+        "first_name": "Bobinette",
+        "last_name": "Veeler",
+        "email": "bveelerw@xinhuanet.com",
+        "password": "LluNDYs",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 34,
+        "first_name": "Alisa",
+        "last_name": "Klaiser",
+        "email": "aklaiserx@bandcamp.com",
+        "password": "beSpDiwLM",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 35,
+        "first_name": "Balduin",
+        "last_name": "McGarahan",
+        "email": "bmcgarahany@arstechnica.com",
+        "password": "GWc4b0Of",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 36,
+        "first_name": "Helen",
+        "last_name": "Dyte",
+        "email": "hdytez@reference.com",
+        "password": "WoreBB",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 37,
+        "first_name": "Nickolaus",
+        "last_name": "Le Jean",
+        "email": "nlejean10@weebly.com",
+        "password": "PRjLTA",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 38,
+        "first_name": "Saree",
+        "last_name": "Berkley",
+        "email": "sberkley11@mayoclinic.com",
+        "password": "wkQkcj4jae",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 39,
+        "first_name": "Jourdain",
+        "last_name": "Chalke",
+        "email": "jchalke12@mapquest.com",
+        "password": "XPmkDIVdnBC1",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 40,
+        "first_name": "Ebeneser",
+        "last_name": "Rugieri",
+        "email": "erugieri13@so-net.ne.jp",
+        "password": "jTmZSB",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 41,
+        "first_name": "Tailor",
+        "last_name": "Mousby",
+        "email": "tmousby14@si.edu",
+        "password": "JCJbjsSDrb",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 42,
+        "first_name": "Lief",
+        "last_name": "Eagleton",
+        "email": "leagleton15@addtoany.com",
+        "password": "vqLXGRT8Vh7r",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 43,
+        "first_name": "Vale",
+        "last_name": "Cadden",
+        "email": "vcadden16@parallels.com",
+        "password": "6HOE9vIK",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 44,
+        "first_name": "Freddy",
+        "last_name": "Pass",
+        "email": "fpass17@behance.net",
+        "password": "hwBgsOMGp",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 45,
+        "first_name": "Cal",
+        "last_name": "Cloughton",
+        "email": "ccloughton18@nasa.gov",
+        "password": "sBZM8xUsX",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 46,
+        "first_name": "Darrell",
+        "last_name": "Lind",
+        "email": "dlind19@nymag.com",
+        "password": "2BfRYs9zXlrM",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 47,
+        "first_name": "Genevra",
+        "last_name": "Laffin",
+        "email": "glaffin1a@answers.com",
+        "password": "gfOsxrPLNYu",
+        "myFavorites": [
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 48,
+        "first_name": "Enos",
+        "last_name": "Semonin",
+        "email": "esemonin1b@census.gov",
+        "password": "Cb74AZ4c",
+        "myFavorites": [
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "id": 49,
+        "first_name": "Gerri",
+        "last_name": "Plenderleith",
+        "email": "gplenderleith1c@phpbb.com",
+        "password": "yI0NdXBlDJG",
+        "myFavorites": [
+            {}
+        ]
+    },
+    {
+        "id": 50,
+        "first_name": "Helaine",
+        "last_name": "Pitkins",
+        "email": "hpitkins1d@people.com.cn",
+        "password": "urs0XvLwqzx",
+        "myFavorites": [
+            {},
+            {}
+        ]
+    }
+]
