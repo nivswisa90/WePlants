@@ -7,23 +7,27 @@ let plantID = 7;//to check how to make it dynamic!!!!!!
 exports.plantDBController = {
 
     getPlants(req, res) {
-        if (req.query.family) {
-            Plant.find({ family: `${req.query.family}` })
-                .then(docs => { res.json(docs) })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        }
+        Plant.find({$or:[{name: req.query.name}, {family: req.query.name}]})
+        .then(docs => {res.json(docs)})
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+            // res.status(404).send("Error"));
+        // if (req.query.family) {
+        //     Plant.find({ family: `${req.query.family}` })
+        //         .then(docs => { res.json(docs) })
+        //         .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        // }
 
-        else if (req.query.name) {
-            Plant.find({ name: `${req.query.name}` })
-                .then(docs => {res.json(docs)})
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        }
+        // else if (req.query.name) {
+        //     Plant.find({ name: `${req.query.name}` })
+        //         .then(docs => {res.json(docs)})
+        //         .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        // }
 
-        else{
-            Plant.find({})
-                .then(docs => { res.json(docs) })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));   
-        }
+        // else{
+        //     Plant.find({})
+        //         .then(docs => { res.json(docs) })
+        //         .catch(err => console.log(`Error getting the data from DB: ${err}`));   
+        // }
     },
 
     getPlant(req, res) {
