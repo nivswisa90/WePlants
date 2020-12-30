@@ -33,7 +33,6 @@ exports.userDBController = {
         User.findOne({ id: parseInt(req.params.id) })
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
-
     },
 
     addUser(req, res) {
@@ -53,6 +52,7 @@ exports.userDBController = {
 
     },
     addMyFavorites(req, res) {
+        //Need to check if name exist in favorite
         const name = req.query.name;
         Plant.findOne({name: name})
             .then((docs) => {
@@ -60,7 +60,8 @@ exports.userDBController = {
                 const id = 10;
                 const plant_name = docs.name;
                 const description = docs.description;
-                User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description}}})
+                const image_url = docs.url;
+                User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
                     .then(docs => { res.json(docs) })
                     .catch(err => console.log(`Error getting the data from DB: ${err}`));
             })
