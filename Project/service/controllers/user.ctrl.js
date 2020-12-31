@@ -53,7 +53,7 @@ exports.userDBController = {
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
     },
-    updateUser(req, res) {
+    updateUserOrAddToFavorites(req, res) {
         User.find({id: parseInt(req.params.id)})
         .then(docs => {
             const Favorites = docs[0].myFavorites;
@@ -74,12 +74,13 @@ exports.userDBController = {
                         const description = docs.description;
                         const image_url = docs.image_url;
                         User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
-                        .then(docs => { res.json(docs) })
+                        .then(docs => { console.log(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                     }
                     else{
                         res.send('Plant not found');
                     }
+                    res.json(docs);
                 })
                 .catch((err) => console.log(`Error getting the data from DB: ${err}`));
             }
@@ -87,7 +88,7 @@ exports.userDBController = {
         .catch(err => console.log(`Error: ${err}`));
     },
     deleteUserOrFavoritePlant(req, res) {
-        if(req.query.plant) {
+        if(req.query.name) {
             console.log('there is a plant ');
             User.find({id: parseInt(req.params.id)})
             .then(docs => {
@@ -95,7 +96,7 @@ exports.userDBController = {
                 const favLen = fav.length;
                 console.log(fav);
                 for(let i = 0; i<favLen; i++){
-                    if(fav[i].plant_name == req.query.plant){
+                    if(fav[i].plant_name == req.query.name){
                         User.updateOne({ id: parseInt(req.params.id)} , {$pull: {"myFavorites": {plant_name: fav[i].plant_name}}})
                         .then(docs => { res.json(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
