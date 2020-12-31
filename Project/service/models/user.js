@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose');
 const favoritesSchema = new Schema({
     id: {type: Number},
     plant_name: {type: String, required: true},
-    description: {type: String}
+    description: {type: String},
+    image_url: {type: String}
 });
 
 const userSchema = new Schema({
@@ -11,7 +12,6 @@ const userSchema = new Schema({
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     email: {type: String, required: true},
-    // password: {type: String, required: true},
     myFavorites: [favoritesSchema],
 
 }, { collection: 'users'});

@@ -2,11 +2,15 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const {plantRouter} = require("./routers/plantRouter");
 const {userRouter} = require("./routers/userRouter");
+const {weatherRouter} = require("./routers/weatherRouter");
 // const fetch = require('node-fetch');
+
+
 
 // (async () => {
 //   const response = await fetch('https://trefle.io/api/v1/plants?token=GgCIrLPYyakGqb0RqAgJYVZgiisNvhgBHTgXMQ5NymY');
@@ -28,6 +32,7 @@ app.use((req,res,next) =>{
 
 app.use('/api/plants', plantRouter);
 app.use('/api/users', userRouter);
+app.use('/api/weather', weatherRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

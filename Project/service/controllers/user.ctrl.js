@@ -2,10 +2,16 @@ const { query } = require('express');
 const User = require('../models/user');
 const Plant = require('../models/plants');
 
+ 
 
-let userID = 7;//to check how to make it dynamic!!!!!!
-// let data;
+    
+
+
+
+let userID = 7;
+
 exports.userDBController = {
+
 
     getUsers(req, res) {
 
@@ -60,7 +66,7 @@ exports.userDBController = {
                 const id = 10;
                 const plant_name = docs.name;
                 const description = docs.description;
-                const image_url = docs.url;
+                const image_url = docs.image_url;
                 User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
                     .then(docs => { res.json(docs) })
                     .catch(err => console.log(`Error getting the data from DB: ${err}`));
