@@ -3,7 +3,7 @@ const { query } = require("express");
 const { set } = require("mongoose");
 const Plant = require("../models/plants");
 
-let plantID = 7; //to check how to make it dynamic!!!!!!
+let plantID = 7;
 
 exports.plantDBController = {
   // Need to return error in case of not found

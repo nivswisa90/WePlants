@@ -80,41 +80,35 @@ exports.userDBController = {
                     else{
                         res.send('Plant not found');
                     }
-                    // const id = 10;
-                    // const plant_name = docs.name;
-                    // const description = docs.description;
-                    // const image_url = docs.image_url;
-                    
-                    // User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
-                    //     .then(docs => { res.json(docs) })
-                    //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
                 })
                 .catch((err) => console.log(`Error getting the data from DB: ${err}`));
             }
         })
         .catch(err => console.log(`Error: ${err}`));
-        
-        // const name = req.query.name;
-        // Plant.findOne({name: name})
-        //     .then((docs) => {
-        //         const id = 10;
-        //         const plant_name = docs.name;
-        //         const description = docs.description;
-        //         const image_url = docs.image_url;
-        //         User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
-        //             .then(docs => { res.json(docs) })
-        //             .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        //     })
-        //     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-
-        // User.updateOne({ id: parseInt(req.params.id) },{$set: {...req.body}})
-        //     .then(docs => { res.json(docs) })
-        //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
-    deleteUser(req, res) {
-        User.findOneAndDelete({ id: parseInt(req.params.id) })
+    deleteUserOrFavoritePlant(req, res) {
+        if(req.query.plant) {
+            console.log('there is a plant ');
+            User.find({id: parseInt(req.params.id)})
+            .then(docs => {
+                const fav = docs[0].myFavorites;
+                const favLen = fav.length;
+                console.log(fav);
+                for(let i = 0; i<favLen; i++){
+                    if(fav[i].plant_name == req.query.plant){
+                        User.updateOne({ id: parseInt(req.params.id)} , {$pull: {"myFavorites": {plant_name: fav[i].plant_name}}})
+                        .then(docs => { res.json(docs) })
+                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                        break;
+                    }
+                }
+            })
+        }
+        else{
+            User.findOneAndDelete({ id: parseInt(req.params.id) })
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        }
     }
 };
 

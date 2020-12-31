@@ -9,5 +9,4 @@ plantRouter.post('/', plantDBController.addPlant);
 plantRouter.put('/:id', plantDBController.updatePlant);
 plantRouter.delete('/:id', plantDBController.deletePlant);
 
-
 module.exports = {plantRouter};
