@@ -6,22 +6,28 @@ const Plant = require("../models/plants");
 let plantID = 7;
 
 exports.plantDBController = {
-  // Need to return error in case of not found
   getPlants(req, res) {
-    Plant.find({
-      $or: [
-        {
-          name: req.query.name,
-        },
-        {
-          family: req.query.name,
-        },
-      ],
-    })
-      .then((docs) => {
-        res.json(docs);
+    if(req.query.name){
+      Plant.find({
+        $or: [
+          {
+            name: req.query.name,
+          },
+          {
+            family: req.query.name,
+          },
+        ],
       })
-      .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+        .then((docs) => {
+          res.json(docs);
+        })
+        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+    }
+    else{
+      Plant.find({})
+      .then(docs => res.json(docs))
+      .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    }
   },
 
   getPlant(req, res) {
