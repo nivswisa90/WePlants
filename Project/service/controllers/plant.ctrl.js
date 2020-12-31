@@ -1,4 +1,3 @@
-const e = require("express");
 const { query } = require("express");
 const { set } = require("mongoose");
 const Plant = require("../models/plants");
@@ -7,7 +6,7 @@ let plantID = 7;
 
 exports.plantDBController = {
   getPlants(req, res) {
-    if(req.query.name){
+    if (req.query.name) {
       Plant.find({
         $or: [
           {
@@ -23,10 +22,10 @@ exports.plantDBController = {
         })
         .catch((err) => console.log(`Error getting the data from DB: ${err}`));
     }
-    else{
+    else {
       Plant.find({})
-      .then(docs => res.json(docs))
-      .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        .then(docs => res.json(docs))
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
     }
   },
 

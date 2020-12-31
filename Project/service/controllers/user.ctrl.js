@@ -93,7 +93,6 @@ exports.userDBController = {
             .then(docs => {
                 const fav = docs[0].myFavorites;
                 const favLen = fav.length;
-                console.log(fav);
                 for(let i = 0; i<favLen; i++){
                     if(fav[i].plant_name == req.query.name){
                         User.updateOne({ id: parseInt(req.params.id)} , {$pull: {"myFavorites": {plant_name: fav[i].plant_name}}})

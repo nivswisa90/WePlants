@@ -8,20 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 const {plantRouter} = require("./routers/plantRouter");
 const {userRouter} = require("./routers/userRouter");
 const {weatherRouter} = require("./routers/weatherRouter");
-// const fetch = require('node-fetch');
-
-
-
-// (async () => {
-//   const response = await fetch('https://trefle.io/api/v1/plants?token=GgCIrLPYyakGqb0RqAgJYVZgiisNvhgBHTgXMQ5NymY');
-//   const json = await response.json();
-//   console.log(json);
-// })();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); 
-
-
 
 app.use((req,res,next) =>{
     res.header('Access-Control-Allow-Methods', '*');
