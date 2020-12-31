@@ -89,7 +89,6 @@ exports.userDBController = {
     },
     deleteUserOrFavoritePlant(req, res) {
         if(req.query.name) {
-            console.log('there is a plant ');
             User.find({id: parseInt(req.params.id)})
             .then(docs => {
                 const fav = docs[0].myFavorites;
