@@ -17,7 +17,6 @@ const plantSchema = new Schema({
     way_of_care: [wayOfCareSchema]
 }, { collection: 'plants'});
 
-
 const Plant = model('Plant', plantSchema);
 
 module.exports = Plant;

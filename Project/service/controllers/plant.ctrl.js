@@ -1,6 +1,6 @@
-const {e} = require("express");
-const { query } = require("express");
-const { set } = require("mongoose");
+// const {e} = require("express");
+// const { query } = require("express");
+// const { set } = require("mongoose");
 const Plant = require("../models/plants");
 
 let plantID = 7;
@@ -29,7 +29,6 @@ exports.plantDBController = {
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
     }
   },
-
   getPlant(req, res) {
     Plant.findOne({
       id: parseInt(req.params.id),
@@ -39,7 +38,6 @@ exports.plantDBController = {
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
-
   addPlant(req, res) {
     Plant.countDocuments(
       {
@@ -74,7 +72,6 @@ exports.plantDBController = {
       }
     );
   },
-
   updatePlant(req, res) {
     const toUpdate = req.body.way_of_care;
     let set = {
@@ -98,7 +95,6 @@ exports.plantDBController = {
     if (req.body.description) {
       set.$set["description"] = req.body.description;
     }
-
     Plant.updateOne(
       {
         id: parseInt(req.params.id),
@@ -110,7 +106,6 @@ exports.plantDBController = {
       })
       .catch((err) => console.log(`Error updating the data in DB: ${err}`));
   },
-
   deletePlant(req, res) {
     Plant.findOneAndDelete({
       id: parseInt(req.params.id),
