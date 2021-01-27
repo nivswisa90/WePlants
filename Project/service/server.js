@@ -22,6 +22,7 @@ app.use((req,res,next) =>{
 app.use('/api/plants', plantRouter);
 app.use('/api/users', userRouter);
 app.use('/api/weather', weatherRouter);
+app.get('*', (req, res) => {res.send('Welcome to WePlants heroku server');});
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

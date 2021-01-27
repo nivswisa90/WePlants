@@ -1,7 +1,5 @@
-// const { query } = require('express');
 const User = require('../models/user');
 const Plant = require('../models/plants');
-// const e = require('express');
 
 let userID = 7;
 
@@ -35,7 +33,7 @@ exports.userDBController = {
             "first_name": req.body.first_name,
             "last_name": req.body.last_name,
             "email": req.body.email,
-            "myFavorites": req.body.myFavorites
+            "my_favorites": req.body.my_favorites
         });
         newUser.save()
             .then(docs => { res.json(docs) })
@@ -44,7 +42,7 @@ exports.userDBController = {
     updateUserOrAddToFavorites(req, res) {
         User.find({id: parseInt(req.params.id)})
         .then(docs => {
-            const Favorites = docs[0].myFavorites;
+            const Favorites = docs[0].my_favorites;
             const favLen = Favorites.length;
             const plantName = req.query.name;
             let i = 0;
@@ -62,7 +60,8 @@ exports.userDBController = {
                         const plant_name = docs.name;
                         const description = docs.description;
                         const image_url = docs.image_url;
-                        User.updateOne({ id: parseInt(req.params.id)} , {$push: {"myFavorites": {id: id, plant_name: plant_name, description: description, image_url: image_url}}})
+                        const date = docs.date;
+                        User.updateOne({ id: parseInt(req.params.id)} , {$push: {"my_favorites": {id: id, plant_name: plant_name, description: description, image_url: image_url, date: date}}})
                         .then(docs => { console.log(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                     }
@@ -80,11 +79,11 @@ exports.userDBController = {
         if(req.query.name) {
             User.find({id: parseInt(req.params.id)})
             .then(docs => {
-                const fav = docs[0].myFavorites;
+                const fav = docs[0].my_favorites;
                 const favLen = fav.length;
                 for(let i = 0; i<favLen; i++){
                     if(fav[i].plant_name == req.query.name){
-                        User.updateOne({ id: parseInt(req.params.id)} , {$pull: {"myFavorites": {plant_name: fav[i].plant_name}}})
+                        User.updateOne({ id: parseInt(req.params.id)} , {$pull: {"my_favorites": {plant_name: fav[i].plant_name}}})
                         .then(docs => { res.json(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                         break;

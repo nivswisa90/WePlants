@@ -1,6 +1,5 @@
 const { Router } = require('express'); 
 const{ plantDBController} = require('../controllers/plant.ctrl');
-
 const plantRouter = new Router();  
 
 plantRouter.get('/', plantDBController.getPlants);
