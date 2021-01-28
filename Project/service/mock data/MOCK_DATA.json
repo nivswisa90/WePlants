@@ -82,5 +82,91 @@
             "feed": "A weak solution of balanced fertiliser once a month during summer",
             "temperature": "Normal room temperature anywhere between 18-24°C. Protect from draughts."
         }
+    },
+    {
+        "id": 7,
+        "name": "Ctenanthe burle marxii Amabilis",
+        "specie": "Ctenanthe burle",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Ctenanthe-burle-marxii-Amabilis-Never-Never-Plant_2000x.jpg?v=1569062579",
+        "family": "Ctenanthe plants",
+        "description": "Ctenanthe are related to Maranta, Calathea and Stromanthe. All are known and cherished for their extraordinary decorative foliage and are sometimes called Prayer Plants due to the way the leaves close upwards in a prayer-like fashion in the dark.",
+        "way_of_care": {
+            "light": "Bright, indirect light. Will tolerate some degree of shade; however insufficient light may cause loss of variegation in the leaves. Too much light on the other hand will cause the leaves to fade",
+            "water": "Keep soil moist at all times. Allow the top of the soil to dry out slightly before watering.",
+            "feed": "pply a weak dose of a liquid fertiliser once or twice a month during the growing season.",
+            "temperature": "Normal room temperatures from 16-24°C but can cope with as low as 13°C.."
+        }
+    }
+    
+    {
+        "id": 8,
+        "name": "Ctenanthe burle marxii Amagris",
+        "specie": "Ctenanthe burle",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Ctenanthe-burle-marxii-Amagris-Never-Never-Plant_2000x.jpg?v=1569154756",
+        "family": "Ctenanthe plants",
+        "description": "Ctenanthe burle marxii Amagris is slow growing with pale grey-green, oval leaves and dramatic dark green curving stripes. The leaves are wonderfully offset by a deep purple stem and leaf underside.",
+        "way_of_care": {
+            "light": "Bright, indirect light. Will tolerate some degree of shade; however insufficient light may cause loss of variegation in the leaves. Too much light on the other hand will cause the leaves to fade",
+            "water": "Keep soil moist at all times. Allow the top of the soil to dry out slightly before watering.",
+            "feed": "Apply a weak dose of a liquid fertiliser once or twice a month during the growing season.",
+            "temperature": "Normal room temperatures from 16-24°C but can cope with as low as 13°C."
+        }
+    }
+    {
+        "id": 9,
+        "name": "Dracaena fragrans White Jewel",
+        "specie": "Dracaena fragrans",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Dracaena-fragrans-White-Jewel-Head_2000x.jpg?v=1569062893",
+        "family": "Dracaena plants",
+        "description": "A white variegated Dracaena. The strong white striping contrasts beautifully with the broad leafed deep green background and the hint of lighter green stripes. Elegance in a pot!",
+        "way_of_care": {
+            "light": " Dracaena White Jewel is a versatile plant, coping with light shade through to bright, indirect light. Avoid direct sunlight.",
+            "water": "Water when the soil starts to dry out at the top, water well and allow to drain thoroughly. Dracaena are relatively drought tolerant. Do not over water as this will cause the leaf tips to blacken.",
+            "feed": "Apply a weak dose of a fertiliser once or twice a month during the growing season",
+            "temperature": "Average household temperatures between 16-24°C but can cope with as low as 12°C for short periods."
+        }
+    },
+    {
+        "id": 10,
+        "name": "Epipremnum aureum - Golden Pothos",
+        "specie": "Epipremnum aureum",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Epipremnum-aureum-Golden-Pothos-Moss-Pole-19x80cm_2000x.jpg?v=1569092356",
+        "family": "Pothos plants",
+        "description": "Epipremnum aureum has large, glossy green leaves with irregular cream and yellow streaks and blotches that are valued for their air-purifying qualities. Golden Pothos also tolerates lower light levels without losing its variegation. Commonly used as a hanging plant, Devil's Ivy also works really well grown up a moss pole.",
+        "way_of_care": {
+            "light": "Medium light conditions.",
+            "water": "Water when slightly dry. Drought tolerant. Too much water will kill the plant.",
+            "feed": "Apply a weak general purpose fertiliser during the summer.",
+            "temperature": "Happy in normal room temperatures from 10-24°C."
+        }
+    },
+    {
+        "id": 11,
+        "name": "Epipremnum aureum Neon - Golden Neon Pothos",
+        "specie": "Epipremnum aureum",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Epipremnum-Neon-Pothos-Small_2000x.jpg?v=1572900305",
+        "family": "Pothos plants",
+        "description": "Epipremnum aureum Neon is a wonderfully vibrant variety of Golden Pothos, with bright chartreuse yellow leaves with no variegation. Golden Pothos is valued for its air-purifying qualities and tolerance of lower light levels. It looks best displayed as a hanging plant.",
+        "way_of_care": {
+            "light": "Medium light conditions.",
+            "water": "Water when slightly dry. Drought tolerant. Too much water will kill the plant.",
+            "feed": "Apply a weak general purpose fertiliser during the summer.",
+            "temperature": "Happy in normal room temperatures from 10-24°C."
+        }
+    },
+    {
+        "id": 12,
+        "name": "Epipremnum pictum Silvery Ann - Satin Pothos",
+        "specie": "Epipremnum aureum",
+        "image_url": "https://cdn.shopify.com/s/files/1/1706/1307/products/Epipremnum-pictum-Silvery-Ann-Satin-Pothos_2000x.jpg?v=1568984197",
+        "family": "Pothos plants",
+        "description": "Closely related to Epipremnum pictum Argyraeus and Trebie, Silvery Ann is predominantly silvery on top of heart shaped green leaves. It is compact and slow growing and ideal as a hanging plant.",
+        "way_of_care": {
+            "light": "Moderate light levels.",
+            "water": "Water when slightly dry. Drought tolerant. Too much water will kill the plant.",
+            "feed": "Apply a weak general purpose fertiliser during the summer.",
+            "temperature": "Happy in normal room temperatures from 10-24°C."
+        }
     }
 ]
+

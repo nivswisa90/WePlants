@@ -12,6 +12,7 @@ const userSchema = new Schema({
     id: { type: Number },
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
+    password: {type: String, required: true},
     email: {type: String, required: true},
     my_favorites: [favoritesSchema],
 }, { collection: 'users'});

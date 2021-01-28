@@ -34,7 +34,6 @@ exports.plantDBController = {
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
   async addPlant(req, res) {
-    // Need to change the function it allowed to add same plant more than once
     const index = await new Promise((resolve, reject) => {
       const index = Plant.findOne({}).sort({_id: -1}).limit(1);
       resolve(index);
