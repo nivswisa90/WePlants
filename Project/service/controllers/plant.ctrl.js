@@ -1,7 +1,5 @@
 const Plant = require("../models/plants");
 
-let plantID = 7;
-
 exports.plantDBController = {
   getPlants(req, res) {
     if (req.query.name) {
@@ -35,7 +33,13 @@ exports.plantDBController = {
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
-  addPlant(req, res) {
+  async addPlant(req, res) {
+    // Need to change the function it allowed to add same plant more than once
+    const index = await new Promise((resolve, reject) => {
+      const index = Plant.findOne({}).sort({_id: -1}).limit(1);
+      resolve(index);
+    });
+
     Plant.countDocuments(
       {
         name: req.body.name,
@@ -46,9 +50,8 @@ exports.plantDBController = {
         } else if (count == 1) {
           res.status(404).send("User already exist");
         } else {
-          ++plantID;
           const newPlant = new Plant({
-            id: plantID,
+            id: index.id + 1,
             name: req.body.name,
             specie: req.body.specie,
             image_url: req.body.image_url,

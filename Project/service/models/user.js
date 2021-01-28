@@ -9,7 +9,7 @@ const favoritesSchema = new Schema({
 });
 
 const userSchema = new Schema({
-    id: { type: Number, required: true },
+    id: { type: Number },
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     email: {type: String, required: true},

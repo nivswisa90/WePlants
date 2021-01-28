@@ -1,8 +1,6 @@
 const User = require('../models/user');
 const Plant = require('../models/plants');
 
-let userID = 7;
-
 exports.userDBController = {
     getUsers(req, res) {
         if (req.query.first_name) {
@@ -26,10 +24,13 @@ exports.userDBController = {
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
-    addUser(req, res) {
-        ++userID;
+    async addUser(req, res) {
+        const index = await new Promise((resolve, reject) => {
+            const index = User.findOne({}).sort({_id: -1}).limit(1);
+            resolve(index);
+        });
         const newUser = new User({
-            "id": userID,
+            "id": index.id + 1,
             "first_name": req.body.first_name,
             "last_name": req.body.last_name,
             "email": req.body.email,
@@ -56,7 +57,7 @@ exports.userDBController = {
                 Plant.findOne({name: plantName})
                 .then((docs) => {
                     if(docs != null){
-                        const id = 10;
+                        const id = docs.id;
                         const plant_name = docs.name;
                         const description = docs.description;
                         const image_url = docs.image_url;
@@ -98,4 +99,3 @@ exports.userDBController = {
         }
     }
 };
-

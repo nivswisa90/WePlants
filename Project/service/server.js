@@ -16,7 +16,6 @@ app.use((req,res,next) =>{
     res.header('Access-Control-Allow-Origin','*');
     res.set('Content-Type', 'application/json');
     next();
-    
 });
 
 app.use('/api/plants', plantRouter);
