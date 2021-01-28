@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Plant = require('../models/plants');
-const bcrypt = require(bcrypt)
+const bcrypt = require("bcrypt");
 exports.userDBController = {
     getUsers(req, res) {
         if (req.query.first_name) {
