@@ -10,8 +10,15 @@ exports.userDBController = {
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
         else if (req.query.email) {
-            User.find({ email: `${req.query.email}` })
-                .then(docs => { res.json(docs) })
+            User.findOne({ email: `${req.query.email}` })
+                .then(docs => { 
+                    if(!bcrypt.compareSync(req.body.password, docs.password)){
+                        res.json('Wrong password');
+                    } 
+                    else{
+                        res.json(docs);
+                    }
+                })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
         else {
