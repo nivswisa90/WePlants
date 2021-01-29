@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Plant = require('../models/plants');
 const bcrypt = require("bcrypt");
+
 exports.userDBController = {
     getUsers(req, res) {
         if (req.query.first_name) {
@@ -34,7 +35,7 @@ exports.userDBController = {
             "first_name": req.body.first_name,
             "last_name": req.body.last_name,
             "email": req.body.email,
-            "password":req.body.password,
+            "password": bcrypt.hashSync(req.body.password, 10),
             "my_favorites": req.body.my_favorites
         });
         newUser.save()
