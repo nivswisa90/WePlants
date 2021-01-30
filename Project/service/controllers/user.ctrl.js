@@ -11,13 +11,17 @@ exports.userDBController = {
         }
         else if (req.query.email) {
             User.findOne({ email: `${req.query.email}` })
-                .then(docs => { 
-                    if(!bcrypt.compareSync(req.body.password, docs.password)){
-                        res.json('Wrong password');
-                    } 
-                    else{
-                        res.json(docs);
-                    }
+                .then(docs => {
+                    const first_name = docs.first_name;
+                    const last_name = docs.last_name;
+                    const my_favorites = docs.my_favorites;
+                    // if(!bcrypt.compareSync(req.body.password, docs.password)){
+                    //     res.json('Wrong password');
+                    // } 
+                    // else{
+                    //     res.json(docs);
+                    // }
+                    res.json({ first_name, last_name, my_favorites });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
@@ -48,6 +52,20 @@ exports.userDBController = {
         newUser.save()
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    },
+    authenticateUser(req, res) {
+        User.findOne({ email: req.params.email })
+            .then(docs => {
+                if (!bcrypt.compareSync(req.body.password, docs.password)) {
+                    res.json('Wrong password');
+                }
+                else {
+                    const first_name = docs.first_name;
+                    const last_name = docs.last_name;
+                    const my_favorites = docs.my_favorites;
+                    res.json({ first_name, last_name, my_favorites });
+                }
+            })
     },
     updateUserOrAddToFavorites(req, res) {
         User.find({ id: parseInt(req.params.id) })
