@@ -1,7 +1,7 @@
 const Plant = require("../models/plants");
 
 exports.plantDBController = {
-  getPlants(req, res) {
+  async getPlants(req, res) {
     if (req.query.name) {
       Plant.find({
         $or: [

@@ -124,7 +124,7 @@ exports.userDBController = {
                         // const last_name = docs.last_name;
                         // const my_favorites = docs.my_favorites;
                         const token = jwt.sign({ id }, "jwtSecret", {
-                            expiresIn: 60
+                            expiresIn: 3600
                         });
                         res.cookie('token', token);
                         res.json({ token });
@@ -137,11 +137,14 @@ exports.userDBController = {
             })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
-    updateUserOrAddToFavorites(req, res) {
+    async updateUserOrAddToFavorites(req, res) {
         User.find({ id: parseInt(req.params.id) })
             .then(docs => {
                 // need to work on dynamic id in my_favorites
-                const index = () => docs[0].my_favorites.findOne({}).sort({ id: -1 }).limit(1);
+                // const index = () => docs[0].my_favorites.findOne({}).sort({ id: -1 }).limit(1);
+                // console.log(index);
+
+
                 // const Favorites = docs[0].my_favorites;
                 // const favLen = Favorites.length;
                 const plantName = req.query.name;
@@ -156,7 +159,8 @@ exports.userDBController = {
                 Plant.findOne({ name: plantName })
                     .then((docs) => {
                         if (docs != null) {
-                            const id = index().id + 1;
+                            // const id = index().id + 1;
+                            const id = 1;
                             const plant_name = docs.name;
                             const description = docs.description;
                             const image_url = docs.image_url;
