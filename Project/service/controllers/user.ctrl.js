@@ -26,12 +26,6 @@ exports.userDBController = {
                     const first_name = docs.first_name;
                     const last_name = docs.last_name;
                     const my_favorites = docs.my_favorites;
-                    // if(!bcrypt.compareSync(req.body.password, docs.password)){
-                    //     res.json('Wrong password');
-                    // } 
-                    // else{
-                    //     res.json(docs);
-                    // }
                     res.json({ first_name, last_name, my_favorites });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
@@ -57,22 +51,10 @@ exports.userDBController = {
                             .catch(err => console.log(`Error getting the data from DB: ${err}`));
                     }
                 })
-                // User.find({})
-                //     .then(docs => { res.json(docs) })
-                //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
             }
         }
     },
     getUser(req, res) {
-        // console.log(parseInt(req.params.id));
-        // User.findOne({ id: parseInt(req.params.id) })
-        //     .then(docs => {
-        //         const first_name = docs.first_name;
-        //         const last_name = docs.last_name;
-        //         const my_favorites = docs.my_favorites; //Change to camelCase
-        //         res.json({ first_name, last_name, my_favorites });
-        //     })
-        //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
         const token = req.cookies.token;
         if (!token) {
             res.send('Token is missing');
@@ -120,9 +102,6 @@ exports.userDBController = {
                     }
                     else {
                         const id = docs.id;
-                        // const first_name = docs.first_name;
-                        // const last_name = docs.last_name;
-                        // const my_favorites = docs.my_favorites;
                         const token = jwt.sign({ id }, "jwtSecret", {
                             expiresIn: 3600
                         });
@@ -142,29 +121,17 @@ exports.userDBController = {
             .then(docs => {
                 // need to work on dynamic id in my_favorites
                 // const index = () => docs[0].my_favorites.findOne({}).sort({ id: -1 }).limit(1);
-                // console.log(index);
 
-
-                // const Favorites = docs[0].my_favorites;
-                // const favLen = Favorites.length;
                 const plantName = req.query.name;
-                // let i = 0;
-                // for(i; i<favLen; i++) {
-                //     if(plantName == Favorites[i].plant_name) {
-                //         res.send('This plant is already added in your favorites');
-                //         break;
-                //     }
-                // }
-                // if(i == favLen){
+
                 Plant.findOne({ name: plantName })
                     .then((docs) => {
                         if (docs != null) {
-                            // const id = index().id + 1;
-                            const id = 1;
+                            const id = 1;   //Need to be dynamic
                             const plant_name = docs.name;
                             const description = docs.description;
                             const image_url = docs.image_url;
-                            const date = '28.01.2020';
+                            const date = '28.01.2020';  //Need to be dynamic
                             User.updateOne({ id: parseInt(req.params.id) }, { $push: { "my_favorites": { id: id, plant_name: plant_name, description: description, image_url: image_url, date: date } } })
                                 .then(docs => { console.log(docs) })
                                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
@@ -175,7 +142,6 @@ exports.userDBController = {
                         res.json(docs);
                     })
                     .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-                // }
             })
             .catch(err => console.log(`Error: ${err}`));
     },
