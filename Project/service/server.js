@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require('cors');
 const logger = require('morgan');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 
@@ -22,8 +24,7 @@ app.use((req,res,next) =>{
     next();
 });
 
-
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:3001'}));
 app.use('/api/plants', plantRouter);
 app.use('/api/users', userRouter);
 app.use('/api/weather', weatherRouter);

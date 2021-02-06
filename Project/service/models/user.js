@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const favoritesSchema = new Schema({
     id: {type: Number},
@@ -16,6 +17,21 @@ const userSchema = new Schema({
     email: {type: String, required: true},
     my_favorites: [favoritesSchema],
 }, { collection: 'users'});
+
+// userSchema.statics.login = async function(email, password) {
+//     const user = await this.findOne({ email });
+
+//     if(user) {
+//         const auth = bcrypt.compareSync(password, user.password);
+//         if(auth) {
+//             return user;
+//         }
+//         else {
+//             throw Error('Wrong password');
+//         }
+//     }
+//     throw Error('User does not exist');
+// }
 
 const User = model('User', userSchema);
 

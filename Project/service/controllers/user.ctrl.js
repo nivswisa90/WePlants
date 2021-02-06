@@ -1,10 +1,21 @@
 const User = require('../models/user');
 const Plant = require('../models/plants');
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 exports.userDBController = {
     getUsers(req, res) {
-        if (req.query.first_name) {
+        const token = req.cookies.token;
+        if (token) {
+            jwt.verify(token, 'jwtSecret', async (err, decoded) => {
+                if (err) {
+                    res.json({ auth: false, message: 'authentication problem' })
+                } else {
+                    res.json({ id: decoded.id });
+                }
+            })
+        }
+        else if (req.query.first_name) {
             User.find({ first_name: `${req.query.first_name}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
@@ -26,15 +37,62 @@ exports.userDBController = {
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
         else {
-            User.find({})
-                .then(docs => { res.json(docs) })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+            const token = req.cookies.token;
+
+            if (!token) {
+                res.send('Token is missing');
+            } else {
+                jwt.verify(token, 'jwtSecret', (err, decoded) => {
+                    if (err) {
+                        res.json({ auth: false, message: 'authentication problem' })
+                    } else {
+                        req.userId = decoded.id;
+                        User.findOne({ id: decoded.id })
+                            .then(docs => {
+                                const first_name = docs.first_name;
+                                const last_name = docs.last_name;
+                                const my_favorites = docs.my_favorites; //Change to camelCase
+                                res.json({ first_name, last_name, my_favorites });
+                            })
+                            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                    }
+                })
+                // User.find({})
+                //     .then(docs => { res.json(docs) })
+                //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
+            }
         }
     },
     getUser(req, res) {
-        User.findOne({ id: parseInt(req.params.id) })
-            .then(docs => { res.json(docs) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        // console.log(parseInt(req.params.id));
+        // User.findOne({ id: parseInt(req.params.id) })
+        //     .then(docs => {
+        //         const first_name = docs.first_name;
+        //         const last_name = docs.last_name;
+        //         const my_favorites = docs.my_favorites; //Change to camelCase
+        //         res.json({ first_name, last_name, my_favorites });
+        //     })
+        //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        const token = req.cookies.token;
+        if (!token) {
+            res.send('Token is missing');
+        } else {
+            jwt.verify(token, 'jwtSecret', (err, decoded) => {
+                if (err) {
+                    res.json({ auth: false, message: 'authentication problem' })
+                } else {
+                    req.userId = decoded.id;
+                    User.findOne({ id: parseInt(req.params.id) })
+                        .then(docs => {
+                            const first_name = docs.first_name;
+                            const last_name = docs.last_name;
+                            const my_favorites = docs.my_favorites; //Change to camelCase
+                            res.json({ first_name, last_name, my_favorites });
+                        })
+                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                }
+            })
+        }
     },
     async addUser(req, res) {
         const index = await new Promise((resolve, reject) => {
@@ -53,19 +111,31 @@ exports.userDBController = {
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
-    authenticateUser(req, res) {
+    async login(req, res) {
         User.findOne({ email: req.params.email })
             .then(docs => {
-                if (!bcrypt.compareSync(req.body.password, docs.password)) {
-                    res.json('Wrong password');
+                if (docs) {
+                    if (!bcrypt.compareSync(req.body.password, docs.password)) {
+                        res.json('Wrong password');
+                    }
+                    else {
+                        const id = docs.id;
+                        // const first_name = docs.first_name;
+                        // const last_name = docs.last_name;
+                        // const my_favorites = docs.my_favorites;
+                        const token = jwt.sign({ id }, "jwtSecret", {
+                            expiresIn: 60
+                        });
+                        res.cookie('token', token);
+                        res.json({ token });
+                    }
                 }
                 else {
-                    const first_name = docs.first_name;
-                    const last_name = docs.last_name;
-                    const my_favorites = docs.my_favorites;
-                    res.json({ first_name, last_name, my_favorites });
+                    res.json('User does not exist');
                 }
+
             })
+            .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
     updateUserOrAddToFavorites(req, res) {
         User.find({ id: parseInt(req.params.id) })
