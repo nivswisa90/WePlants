@@ -4,17 +4,38 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
+const getUserId = (req, res) => {
+    const token = req.cookies.token;
+    let id;
+    if (!token) {
+        return;
+    } else {
+        jwt.verify(token, 'jwtSecret', (err, decoded) => {
+            if (err) {
+                res.json({ auth: false, message: 'authentication problem' })
+            } else {
+                id = decoded.id;
+            }
+        })
+    }
+    return id;
+};
+
 exports.userDBController = {
     getUsers(req, res) {
-        const token = req.cookies.token;
-        if (token) {
-            jwt.verify(token, 'jwtSecret', async (err, decoded) => {
-                if (err) {
-                    res.json({ auth: false, message: 'authentication problem' })
-                } else {
-                    res.json({ id: decoded.id });
-                }
-            })
+        // const token = req.cookies.token;
+        // if (token) {
+        //     jwt.verify(token, 'jwtSecret', async (err, decoded) => {
+        //         if (err) {
+        //             res.json({ auth: false, message: 'authentication problem' })
+        //         } else {
+        //             res.json({ id: decoded.id });
+        //         }
+        //     })
+        // }
+        const id = getUserId(req, res);
+        if (id) {
+            res.json({ id });
         }
         else {
             User.find({})
@@ -23,26 +44,27 @@ exports.userDBController = {
         }
     },
     getUser(req, res) {
-        const token = req.cookies.token;
-        if (!token) {
-            res.send('Token is missing');
+        // const token = req.cookies.token;
+        const id = getUserId(req, res);
+        if (id != parseInt(req.params.id)) {
+            res.send('Authentication error');
         } else {
-            jwt.verify(token, 'jwtSecret', (err, decoded) => {
-                if (err) {
-                    res.json({ auth: false, message: 'authentication problem' })
-                } else {
-                    req.userId = decoded.id;
-                    User.findOne({ id: parseInt(req.params.id) })
-                        .then(docs => {
-                            const first_name = docs.first_name;
-                            const last_name = docs.last_name;
-                            const my_favorites = docs.my_favorites; //Change to camelCase
-                            res.json({ first_name, last_name, my_favorites });
-                        })
-                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
-                }
-            })
+            // jwt.verify(token, 'jwtSecret', (err, decoded) => {
+            //     if (err) {
+            //         res.json({ auth: false, message: 'authentication problem' })
+            //     } else {
+            // req.userId = decoded.id;
+            User.findOne({ id })
+                .then(docs => {
+                    const first_name = docs.first_name;
+                    const last_name = docs.last_name;
+                    const my_favorites = docs.my_favorites; //Change to camelCase
+                    res.json({ first_name, last_name, my_favorites });
+                })
+                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+            // }
         }
+
     },
     async addUser(req, res) {
         const index = await new Promise((resolve, reject) => {
@@ -85,40 +107,47 @@ exports.userDBController = {
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
     async updateUserOrAddToFavorites(req, res) {
-        User.find({ id: parseInt(req.params.id) })
-            .then(async docs => {
-                const max = docs[0].my_favorites.reduce((prev, curr) => prev = prev > docs[0].my_favorites.id ? prev : curr.id, 0);
-                const plantName = req.query.name;
+        const userId = getUserId(req, res);
+        if (userId != parseInt(req.params.id)) {
+            res.send('Authentication error');
+        }
+        else {
+            User.find({ id: userId })
+                .then(async docs => {
+                    const max = docs[0].my_favorites.reduce((prev, curr) => prev = prev > docs[0].my_favorites.id ? prev : curr.id, 0);
+                    const plantName = req.query.name;
 
-                Plant.findOne({ name: plantName })
-                    .then((docs) => {
-                        if (docs != null) {
-                            const id = max + 1;
-                            const plant_name = docs.name;
-                            const description = docs.description;
-                            const image_url = docs.image_url;
-                            const date = moment().format('DD/MM/YYYY');
-                            User.updateOne({ id: parseInt(req.params.id) }, { $push: { "my_favorites": { id: id, plant_name: plant_name, description: description, image_url: image_url, date: date } } })
-                                .then(docs => { console.log(docs) })
-                                .catch(err => console.log(`Error getting the data from DB: ${err}`));
-                        }
-                        else {
-                            res.send('Plant not found');
-                        }
-                        res.json(docs);
-                    })
-                    .catch((err) => console.log(`Error getting the data from DB: ${err}`));
-            })
-            .catch(err => console.log(`Error: ${err}`));
+                    Plant.findOne({ name: plantName })  //Need to change to plant id
+                        .then((docs) => {
+                            if (docs != null) {
+                                const id = max + 1;
+                                const plant_name = docs.name;
+                                const description = docs.description;
+                                const image_url = docs.image_url;
+                                const date = moment().format('DD/MM/YYYY');
+                                User.updateOne({ id: parseInt(req.params.id) }, { $push: { "my_favorites": { id: id, plant_name: plant_name, description: description, image_url: image_url, date: date } } })
+                                    .then(docs => { console.log(docs) })
+                                    .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                            }
+                            else {
+                                res.send('Plant not found');
+                            }
+                            res.json(docs);
+                        })
+                        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+                })
+                .catch(err => console.log(`Error: ${err}`));
+        }
     },
     deleteUserOrFavoritePlant(req, res) {
-        if (req.query.plantId) {
-            User.find({ id: parseInt(req.params.id) })
+        const userId = getUserId(req, res);
+        if (userId == parseInt(req.params.id) && req.query.plantId) {
+            User.find({ id: userId })
                 .then(docs => {
                     const fav = docs[0].my_favorites;
                     const favPlantId = req.query.plantId;
                     deleteFavorite = fav.filter(item => item.id == favPlantId);
-                    User.updateOne({ id: parseInt(req.params.id) }, { $pull: { "my_favorites": { id: deleteFavorite[0].id } } })
+                    User.updateOne({ id: userId }, { $pull: { "my_favorites": { id: deleteFavorite[0].id } } })
                         .then(docs => { res.json(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                     // const favLen = fav.length;

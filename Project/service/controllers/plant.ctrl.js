@@ -12,7 +12,7 @@ exports.plantDBController = {
             family: req.query.name,
           },
         ],
-      })
+      }).collation( { locale: 'en', strength: 2 })
         .then((docs) => {
           res.json(docs);
         })
