@@ -4,11 +4,11 @@ exports.plantDBController = {
   async getPlants(req, res) {
     if (req.query.name) {
       const plantName = req.query.name;
-      
+
       Plant.find({
         $or: [
           {
-            name: plantName,
+            plantName: plantName,
           },
           {
             family: plantName,
@@ -43,7 +43,7 @@ exports.plantDBController = {
 
     Plant.countDocuments(
       {
-        name: req.body.name,
+        plantName: req.body.plantName,
       },
       function (err, count) {
         if (err) {
@@ -53,12 +53,12 @@ exports.plantDBController = {
         } else {
           const newPlant = new Plant({
             id: index.id + 1,
-            name: req.body.name,
+            plantName: req.body.plantName,
             specie: req.body.specie,
-            image_url: req.body.image_url,
+            imageUrl: req.body.imageUrl,
             family: req.body.family,
             description: req.body.description,
-            way_of_care: req.body.way_of_care,
+            wayOfCare: req.body.wayOfCare,
           });
 
           newPlant
@@ -74,24 +74,24 @@ exports.plantDBController = {
     );
   },
   updatePlant(req, res) {
-    const toUpdate = req.body.way_of_care;
+    const toUpdate = req.body.wayOfCare;
     let set = {
       $set: {},
     };
     if (toUpdate.water) {
-      set.$set["way_of_care.water"] = toUpdate.water;
+      set.$set["wayOfCare.water"] = toUpdate.water;
     }
     if (toUpdate.feed) {
-      set.$set["way_of_care.feed"] = toUpdate.feed;
+      set.$set["wayOfCare.feed"] = toUpdate.feed;
     }
     if (toUpdate.light) {
-      set.$set["way_of_care.light"] = toUpdate.light;
+      set.$set["wayOfCare.light"] = toUpdate.light;
     }
     if (toUpdate.temperature) {
-      set.$set["way_of_care.temperature"] = toUpdate.temperature;
+      set.$set["wayOfCare.temperature"] = toUpdate.temperature;
     }
-    if (req.body.image_url) {
-      set.$set["image_url"] = req.body.image_url;
+    if (req.body.imageUrl) {
+      set.$set["imageUrl"] = req.body.imageUrl;
     }
     if (req.body.description) {
       set.$set["description"] = req.body.description;

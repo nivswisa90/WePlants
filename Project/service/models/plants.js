@@ -9,12 +9,12 @@ const wayOfCareSchema = new Schema({
 
 const plantSchema = new Schema({
     id: { type: Number, required: true },
-    name: {type: String, required: true},
+    plantName: {type: String, required: true},
     specie: { type: String },
-    image_url: {type:String, required: true},
+    imageUrl: {type:String, required: true},
     family: { type: String, required: true},
     description: {type: String},
-    way_of_care: [wayOfCareSchema]
+    wayOfCare: [wayOfCareSchema]
 }, { collection: 'plants'});
 
 const Plant = model('Plant', plantSchema);

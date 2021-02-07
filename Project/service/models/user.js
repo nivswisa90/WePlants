@@ -11,11 +11,11 @@ const favoritesSchema = new Schema({
 
 const userSchema = new Schema({
     id: { type: Number },
-    first_name: {type: String, required: true},
-    last_name: {type: String, required: true},
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
     password: {type: String, required: true},
     email: {type: String, required: true},
-    my_favorites: [favoritesSchema],
+    myFavorites: [favoritesSchema],
 }, { collection: 'users'});
 
 const User = model('User', userSchema);

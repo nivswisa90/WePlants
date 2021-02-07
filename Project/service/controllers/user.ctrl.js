@@ -41,10 +41,10 @@ exports.userDBController = {
         } else {
             User.findOne({ id })
                 .then(docs => {
-                    const first_name = docs.first_name;
-                    const last_name = docs.last_name;
-                    const my_favorites = docs.my_favorites; //Change to camelCase
-                    res.json({ first_name, last_name, my_favorites });
+                    const firstName = docs.firstName;
+                    const lastName = docs.lastName;
+                    const myFavorites = docs.myFavorites; //Change to camelCase
+                    res.json({ id, firstName, lastName, myFavorites });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
@@ -57,11 +57,11 @@ exports.userDBController = {
         });
         const newUser = new User({
             "id": index.id + 1,
-            "first_name": req.body.first_name,
-            "last_name": req.body.last_name,
+            "firstName": req.body.firstName,
+            "lastName": req.body.lastName,
             "email": req.body.email,
             "password": bcrypt.hashSync(req.body.password, 10),
-            "my_favorites": req.body.my_favorites
+            "myFavorites": req.body.myFavorites
         });
         newUser.save()
             .then(docs => { res.json(docs) })
@@ -99,18 +99,19 @@ exports.userDBController = {
         else {
             User.find({ id: userId })
                 .then(async docs => {
-                    const max = docs[0].my_favorites.reduce((prev, curr) => prev = prev > docs[0].my_favorites.id ? prev : curr.id, 0);
-                    const plantName = req.query.name;
+                    const max = docs[0].myFavorites.reduce((prev, curr) => prev = prev > docs[0].myFavorites.id ? prev : curr.id, 0);
+                    // const plantName = req.query.name;
+                    const plantId = req.query.plantId;
 
-                    Plant.findOne({ name: plantName })  //Need to change to plant id
+                    Plant.findOne({ id: plantId })  //Need to change to plant id
                         .then((docs) => {
                             if (docs != null) {
                                 const id = max + 1;
-                                const plant_name = docs.name;
+                                const plantName = docs.plantName;
                                 const description = docs.description;
-                                const image_url = docs.image_url;
+                                const imageUrl = docs.imageUrl;
                                 const date = moment().format('DD/MM/YYYY');
-                                User.updateOne({ id: parseInt(req.params.id) }, { $push: { "my_favorites": { id: id, plant_name: plant_name, description: description, image_url: image_url, date: date } } })
+                                User.updateOne({ id: parseInt(req.params.id) }, { $push: { "myFavorites": { id: id, plantName: plantName, description: description, imageUrl: imageUrl, date: date } } })
                                     .then(docs => { console.log(docs) })
                                     .catch(err => console.log(`Error getting the data from DB: ${err}`));
                             }
@@ -130,10 +131,10 @@ exports.userDBController = {
         if (userId == parseInt(req.params.id) && req.query.plantId) {
             User.find({ id: userId })
                 .then(docs => {
-                    const fav = docs[0].my_favorites;
+                    const fav = docs[0].myFavorites;
                     const favPlantId = req.query.plantId;
                     deleteFavorite = fav.filter(item => item.id == favPlantId);
-                    User.updateOne({ id: userId }, { $pull: { "my_favorites": { id: deleteFavorite[0].id } } })
+                    User.updateOne({ id: userId }, { $pull: { "myFavorites": { id: deleteFavorite[0].id } } })
                         .then(docs => { res.json(docs) })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                 })
