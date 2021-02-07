@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 
 const favoritesSchema = new Schema({
     id: {type: Number},
-    plant_name: {type: String, required: true},
+    plantName: {type: String, required: true},
     description: {type: String},
-    image_url: {type: String},
+    imageUrl: {type: String},
     date: {type: String}
 });
 
