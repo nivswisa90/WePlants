@@ -3,13 +3,15 @@ const Plant = require("../models/plants");
 exports.plantDBController = {
   async getPlants(req, res) {
     if (req.query.name) {
+      const plantName = req.query.name;
+      
       Plant.find({
         $or: [
           {
-            name: req.query.name,
+            name: plantName,
           },
           {
-            family: req.query.name,
+            family: plantName,
           },
         ],
       }).collation( { locale: 'en', strength: 2 })
