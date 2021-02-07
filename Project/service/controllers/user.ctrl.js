@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Plant = require('../models/plants');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 exports.userDBController = {
     getUsers(req, res) {
@@ -17,47 +18,9 @@ exports.userDBController = {
         }
         else {
             User.find({})
-            .then(docs => res.send(docs))
-            .catch(err => console.log(err));
+                .then(docs => res.send(docs))
+                .catch(err => console.log(err));
         }
-        // else if (req.query.first_name) {
-        //     User.find({ first_name: `${req.query.first_name}` })
-        //         .then(docs => { res.json(docs) })
-        //         .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        // }
-        // else if (req.query.email) {
-        //     User.findOne({ email: `${req.query.email}` })
-        //         .then(docs => {
-        //             const first_name = docs.first_name;
-        //             const last_name = docs.last_name;
-        //             const my_favorites = docs.my_favorites;
-        //             res.json({ first_name, last_name, my_favorites });
-        //         })
-        //         .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        // }
-        // else {
-        //     const token = req.cookies.token;
-
-        //     if (!token) {
-        //         res.send('Token is missing');
-        //     } else {
-        //         jwt.verify(token, 'jwtSecret', (err, decoded) => {
-        //             if (err) {
-        //                 res.json({ auth: false, message: 'authentication problem' })
-        //             } else {
-        //                 req.userId = decoded.id;
-        //                 User.findOne({ id: decoded.id })
-        //                     .then(docs => {
-        //                         const first_name = docs.first_name;
-        //                         const last_name = docs.last_name;
-        //                         const my_favorites = docs.my_favorites; //Change to camelCase
-        //                         res.json({ first_name, last_name, my_favorites });
-        //                     })
-        //                     .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        //             }
-        //         })
-        //     }
-        // }
     },
     getUser(req, res) {
         const token = req.cookies.token;
@@ -134,7 +97,7 @@ exports.userDBController = {
                             const plant_name = docs.name;
                             const description = docs.description;
                             const image_url = docs.image_url;
-                            const date = '28.01.2020';  //Need to be dynamic
+                            const date = moment().format('DD/MM/YYYY');
                             User.updateOne({ id: parseInt(req.params.id) }, { $push: { "my_favorites": { id: id, plant_name: plant_name, description: description, image_url: image_url, date: date } } })
                                 .then(docs => { console.log(docs) })
                                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
@@ -149,19 +112,24 @@ exports.userDBController = {
             .catch(err => console.log(`Error: ${err}`));
     },
     deleteUserOrFavoritePlant(req, res) {
-        if (req.query.name) {
+        if (req.query.plantId) {
             User.find({ id: parseInt(req.params.id) })
                 .then(docs => {
                     const fav = docs[0].my_favorites;
-                    const favLen = fav.length;
-                    for (let i = 0; i < favLen; i++) {
-                        if (fav[i].plant_name == req.query.name) {
-                            User.updateOne({ id: parseInt(req.params.id) }, { $pull: { "my_favorites": { plant_name: fav[i].plant_name } } })
-                                .then(docs => { res.json(docs) })
-                                .catch(err => console.log(`Error getting the data from DB: ${err}`));
-                            break;
-                        }
-                    }
+                    const favPlantId = req.query.plantId;
+                    deleteFavorite = fav.filter(item => item.id == favPlantId);
+                    User.updateOne({ id: parseInt(req.params.id) }, { $pull: { "my_favorites": { id: deleteFavorite[0].id } } })
+                        .then(docs => { res.json(docs) })
+                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                    // const favLen = fav.length;
+                    // for (let i = 0; i < favLen; i++) {
+                    //     if (fav[i].plant_name == req.query.name) {
+                    // User.updateOne({ id: parseInt(req.params.id) }, { $pull: { "my_favorites": { plant_name: fav[i].plant_name } } })
+                    //     .then(docs => { res.json(docs) })
+                    //     .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                    //         break;
+                    //     }
+                    // }
                 })
         }
         else {
