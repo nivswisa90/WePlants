@@ -76,10 +76,8 @@ exports.userDBController = {
                     }
                     else {
                         const id = docs.id;
-                        const token = jwt.sign({ id }, "jwtSecret", {
-                            expiresIn: 3600
-                        });
-                        res.cookie('token', token);
+                        const token = jwt.sign({ id }, "jwtSecret");
+                        res.cookie('token', token, {maxAge:6000000});
                         res.json({ token });
                     }
                 }
