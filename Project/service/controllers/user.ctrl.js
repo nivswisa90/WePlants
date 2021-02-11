@@ -67,6 +67,7 @@ exports.userDBController = {
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
+
     async login(req, res) {
         User.findOne({ email: req.params.email })
             .then(docs => {
@@ -123,6 +124,7 @@ exports.userDBController = {
                 .catch(err => console.log(`Error: ${err}`));
         }
     },
+    
     deleteUserOrFavoritePlant(req, res) {
         const userId = getUserId(req, res);
 
