@@ -43,7 +43,7 @@ exports.userDBController = {
                 .then(docs => {
                     const firstName = docs.firstName;
                     const lastName = docs.lastName;
-                    const myFavorites = docs.myFavorites; //Change to camelCase
+                    const myFavorites = docs.myFavorites;
                     res.json({ id, firstName, lastName, myFavorites });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
@@ -64,7 +64,7 @@ exports.userDBController = {
             "myFavorites": req.body.myFavorites
         });
         newUser.save()
-            .then(docs => { res.json(docs) })
+            .then(docs => { res.json({id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites}) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
 

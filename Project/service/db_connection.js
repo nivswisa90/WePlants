@@ -8,6 +8,7 @@ const options = {
     useNewUrlParser: true, // For deprecation warnings
     useCreateIndex: true, // For deprecation warnings
     useUnifiedTopology: true, // For deprecation warnings
+    useFindAndModify: false, // For deprecation warnings
     user: DB_USER,
     pass: DB_PASS
 };
