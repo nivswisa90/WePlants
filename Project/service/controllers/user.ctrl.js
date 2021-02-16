@@ -78,8 +78,8 @@ exports.userDBController = {
                     else {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
-                        res.cookie('token', token, {maxAge:6000000});
-                        res.json({token, id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites});
+                        res.cookie('token', token, { maxAge: 6000000 });
+                        res.json({ token, id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites });
                     }
                 }
                 else {
@@ -96,48 +96,28 @@ exports.userDBController = {
             res.send('Authentication error');
         }
         else {
-            User.find({ id: userId })
-                .then(async docs => {
-                    const max = docs[0].myFavorites.reduce((prev, curr) => prev = prev > docs[0].myFavorites.id ? prev : curr.id, 0);
-                    // const plantName = req.query.name;
-                    const plantId = req.query.plantId;
-
-                    Plant.findOne({ id: plantId })  //Need to change to plant id
-                        .then((docs) => {
-                            if (docs != null) {
-                                const id = max + 1;
-                                const plantName = docs.plantName;
-                                const description = docs.description;
-                                const imageUrl = docs.imageUrl;
-                                const date = moment().format('DD/MM/YYYY');
-                                User.updateOne({ id: parseInt(req.params.id) }, { $push: { "myFavorites": { id: id, plantName: plantName, description: description, imageUrl: imageUrl, date: date } } })
-                                    .then(docs => { console.log(docs) })
-                                    .catch(err => console.log(`Error getting the data from DB: ${err}`));
-                            }
-                            else {
-                                res.send('Plant not found');
-                            }
-                            res.json(docs);
-                        })
-                        .catch((err) => console.log(`Error getting the data from DB: ${err}`));
+            Plant.findOne({ id: parseInt(req.query.plantId) })
+                .then(docs => {
+                    User.findOneAndUpdate({ id: userId }, {
+                        $push: {
+                            "myFavorites": { id: docs.id, plantName: docs.plantName, description: docs.description, imageUrl: docs.imageUrl, date: docs.date }
+                        }
+                    },
+                        { new: true })
+                        .then(docs => res.json({ id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites }))
+                        .catch(err => console.log(err));
                 })
-                .catch(err => console.log(`Error: ${err}`));
+                .catch(err => console.log(err));
         }
     },
-    
+
     deleteUserOrFavoritePlant(req, res) {
         const userId = getUserId(req, res);
 
         if (userId == parseInt(req.params.id) && req.query.plantId) {
-            User.find({ id: userId })
-                .then(docs => {
-                    const fav = docs[0].myFavorites;
-                    const favPlantId = req.query.plantId;
-                    deleteFavorite = fav.filter(item => item.id == favPlantId);
-                    User.updateOne({ id: userId }, { $pull: { "myFavorites": { id: deleteFavorite[0].id } } })
-                        .then(docs => { res.json(docs) })
-                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
-                })
+            User.findOneAndUpdate({ id: userId }, { $pull: { "myFavorites": { id: parseInt(req.query.plantId) } } }, { new: true })
+                .then(docs => res.json({ id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites }))
+                .catch(err => console.log(err));
         }
         else {
             User.findOneAndDelete({ id: parseInt(req.params.id) })
