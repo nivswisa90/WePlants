@@ -62,22 +62,36 @@ exports.userDBController = {
 
     },
     async addUser(req, res) {
-        const index = await new Promise((resolve, reject) => {
-            const index = User.findOne({}).sort({ _id: -1 }).limit(1);
-            resolve(index);
-        });
-        const newUser = new User({
-            "id": index.id + 1,
-            "role": "user",
-            "firstName": req.body.firstName,
-            "lastName": req.body.lastName,
-            "email": req.body.email,
-            "password": bcrypt.hashSync(req.body.password, 10),
-            "myFavorites": req.body.myFavorites
-        });
-        newUser.save()
-            .then(docs => { res.json({id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email:docs.email}) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+        User.findOne({ email: req.body.email })
+            .then(async docs => {
+                if (docs) {
+                    res.json('User already exist');
+                }
+                else {
+                    const index = await new Promise((resolve, reject) => {
+                        const index = User.findOne({}).sort({ _id: -1 }).limit(1);
+                        resolve(index);
+                    });
+                    const newUser = new User({
+                        "id": index.id + 1,
+                        "role": "user",
+                        "firstName": req.body.firstName,
+                        "lastName": req.body.lastName,
+                        "email": req.body.email,
+                        "password": bcrypt.hashSync(req.body.password, 10),
+                        "myFavorites": req.body.myFavorites
+                    });
+                    newUser.save()
+                        .then(docs => { 
+                            const token = jwt.sign({ id:docs.id }, "jwtSecret");
+                            res.cookie('token', token, { maxAge: 6000000 });
+                            res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email 
+                            }) })
+                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                }
+            })
+            .catch(err => console.log(err));
+
     },
 
     async login(req, res) {
@@ -91,7 +105,7 @@ exports.userDBController = {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
                         res.cookie('token', token, { maxAge: 6000000 });
-                        res.json({ id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email });
+                        res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email });
                     }
                 }
                 else {
@@ -128,7 +142,7 @@ exports.userDBController = {
 
         if (userId == parseInt(req.params.id) && req.query.plantId) {
             User.findOneAndUpdate({ id: userId }, { $pull: { "myFavorites": { id: parseInt(req.query.plantId) } } }, { new: true })
-                .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email:docs.email }))
+                .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
                 .catch(err => console.log(err));
         }
         else {
