@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 exports.mailDBController = {
     sendMail(req, res) {
+        console.log(req);
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -13,8 +14,12 @@ exports.mailDBController = {
         const mailOptions = {
             from: process.env.GMAIL_USER,
             to: 'nivswisa9@gmail.com',
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!'
+            subject: 'New plant request',
+            text: 
+            `Hey dude!                                                                                            
+             I didnt found the plant ${req.body.plantName},
+             there is any chance that you can add this plant for me?
+             Thanks!`
         };
     
         transporter.sendMail(mailOptions, function (error, info) {
