@@ -26,6 +26,7 @@ exports.plantDBController = {
         .catch(err => console.log(`Error getting the data from DB: ${err}`));
     }
   },
+
   getPlant(req, res) {
     Plant.findOne({
       id: parseInt(req.params.id),
@@ -35,11 +36,13 @@ exports.plantDBController = {
       })
       .catch((err) => console.log(`Error getting the data from DB: ${err}`));
   },
+
   async addPlant(req, res) {
     const index = await new Promise((resolve, reject) => {
       const index = Plant.findOne({}).sort({_id: -1}).limit(1);
       resolve(index);
     });
+    console.log(req.body);
 
     Plant.countDocuments(
       {
@@ -64,7 +67,7 @@ exports.plantDBController = {
           newPlant
             .save()
             .then((docs) => {
-              res.json(docs);
+              res.json('Succesfully added plant!');
             })
             .catch((err) =>
               console.log(`Error getting the data from DB: ${err}`)

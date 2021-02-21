@@ -25,7 +25,14 @@ exports.userDBController = {
     getUsers(req, res) {
         const id = getUserId(req, res);
         if (id) {
-            res.json({ id });
+            User.findOne({ id })
+                .then(docs => {
+                    const firstName = docs.firstName;
+                    const lastName = docs.lastName;
+                    const myFavorites = docs.myFavorites;
+                    res.json({ id, firstName, lastName, myFavorites });
+                })
+                .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
         else {
             User.find({})
@@ -79,7 +86,7 @@ exports.userDBController = {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
                         res.cookie('token', token, { maxAge: 6000000 });
-                        res.json({ token, id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites });
+                        res.json({ id: docs.id, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites });
                     }
                 }
                 else {
