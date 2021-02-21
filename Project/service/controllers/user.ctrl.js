@@ -31,7 +31,8 @@ exports.userDBController = {
                     const firstName = docs.firstName;
                     const lastName = docs.lastName;
                     const myFavorites = docs.myFavorites;
-                    res.json({ id, role, firstName, lastName, myFavorites });
+                    const email = docs.email;
+                    res.json({ id, role, firstName, lastName, myFavorites, email });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
@@ -53,7 +54,8 @@ exports.userDBController = {
                     const firstName = docs.firstName;
                     const lastName = docs.lastName;
                     const myFavorites = docs.myFavorites;
-                    res.json({ id, role, firstName, lastName, myFavorites });
+                    const email = docs.email;
+                    res.json({ id, role, firstName, lastName, myFavorites, email });
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
@@ -74,7 +76,7 @@ exports.userDBController = {
             "myFavorites": req.body.myFavorites
         });
         newUser.save()
-            .then(docs => { res.json({id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites}) })
+            .then(docs => { res.json({id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email:docs.email}) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
 
@@ -89,7 +91,7 @@ exports.userDBController = {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
                         res.cookie('token', token, { maxAge: 6000000 });
-                        res.json({ id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites });
+                        res.json({ id: docs.id, role:docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email });
                     }
                 }
                 else {
@@ -114,7 +116,7 @@ exports.userDBController = {
                         }
                     },
                         { new: true })
-                        .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites }))
+                        .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
                         .catch(err => console.log(err));
                 })
                 .catch(err => console.log(err));
@@ -126,7 +128,7 @@ exports.userDBController = {
 
         if (userId == parseInt(req.params.id) && req.query.plantId) {
             User.findOneAndUpdate({ id: userId }, { $pull: { "myFavorites": { id: parseInt(req.query.plantId) } } }, { new: true })
-                .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites }))
+                .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email:docs.email }))
                 .catch(err => console.log(err));
         }
         else {
