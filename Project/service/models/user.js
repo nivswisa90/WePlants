@@ -11,6 +11,7 @@ const favoritesSchema = new Schema({
 
 const userSchema = new Schema({
     id: { type: Number },
+    role: { type: String },
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     password: {type: String, required: true},
