@@ -1,6 +1,6 @@
-const { Router } = require('express'); 
-const{ userDBController} = require('../controllers/user.ctrl');
-const userRouter = new Router();  
+const { Router } = require('express');
+const { userDBController } = require('../controllers/user.ctrl');
+const userRouter = new Router();
 
 userRouter.get('/', userDBController.getUsers);
 userRouter.get('/:id', userDBController.getUser);
@@ -9,4 +9,4 @@ userRouter.post('/:email', userDBController.login);
 userRouter.put('/:id', userDBController.updateUserOrAddToFavorites);
 userRouter.delete('/:id', userDBController.deleteUserOrFavoritePlant);
 
-module.exports = {userRouter};
+module.exports = { userRouter };

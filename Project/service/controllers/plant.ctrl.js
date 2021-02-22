@@ -14,7 +14,7 @@ exports.plantDBController = {
             family: plantName,
           },
         ],
-      }).collation( { locale: 'en', strength: 2 })
+      }).collation({ locale: 'en', strength: 2 })
         .then((docs) => {
           res.json(docs);
         })
@@ -39,10 +39,10 @@ exports.plantDBController = {
 
   async addPlant(req, res) {
     const index = await new Promise((resolve, reject) => {
-      const index = Plant.findOne({}).sort({_id: -1}).limit(1);
+      const index = Plant.findOne({}).sort({ _id: -1 }).limit(1);
       resolve(index);
     });
-    
+
     const wayOfCare = {
       light: req.body.light,
       water: req.body.water,

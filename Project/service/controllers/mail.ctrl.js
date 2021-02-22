@@ -10,7 +10,7 @@ exports.mailDBController = {
                 pass: process.env.GMAIL_PASSWORD
             }
         });
-    
+
         const suggestionMail = {
             from: process.env.GMAIL_USER,
             to: req.body.email,
@@ -47,8 +47,8 @@ exports.mailDBController = {
             default:
                 break;
         }
-        
+
         res.json('Email sent successfully');
     }
-    
+
 }

@@ -10,23 +10,23 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 
-const {plantRouter} = require("./routers/plantRouter");
-const {userRouter} = require("./routers/userRouter");
-const {weatherRouter} = require("./routers/weatherRouter");
-const {mailRouter} = require("./routers/mailRouter");
+const { plantRouter } = require("./routers/plantRouter");
+const { userRouter } = require("./routers/userRouter");
+const { weatherRouter } = require("./routers/weatherRouter");
+const { mailRouter } = require("./routers/mailRouter");
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
 
-app.use((req,res,next) =>{
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.set('Content-Type', 'application/json');
     next();
 });
 
-app.use(cors({credentials: true, origin: 'http://localhost:3001'}));
-app.use('/api/users/logout', function(req, res) {
+app.use(cors({ credentials: true, origin: 'http://localhost:3001' }));
+app.use('/api/users/logout', function (req, res) {
     res.clearCookie('token');
     res.json('Successfully logout');
 });
@@ -34,7 +34,7 @@ app.use('/api/plants', plantRouter);
 app.use('/api/users', userRouter);
 app.use('/api/weather', weatherRouter);
 app.use('/api/mail', mailRouter);
-app.get('*', (req, res) => {res.send('Welcome to WePlants heroku server');});
+app.get('*', (req, res) => { res.send('Welcome to WePlants heroku server'); });
 
 
 app.use((err, req, res, next) => {

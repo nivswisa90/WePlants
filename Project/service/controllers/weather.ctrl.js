@@ -4,9 +4,9 @@ const weatherAPI = `https://api.openweathermap.org/data/2.5/weather?q=Jerusalem&
 exports.weatherController = {
     getWeather(req, res) {
         axios.get(weatherAPI)
-        .then(docs => {
-            res.json(docs.data);
-        })
-        .catch((err) => console.log(`Error getting the weather from API: ${err}`));
+            .then(docs => {
+                res.json(docs.data);
+            })
+            .catch((err) => console.log(`Error getting the weather from API: ${err}`));
     }
 }
