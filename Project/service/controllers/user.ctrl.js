@@ -82,11 +82,13 @@ exports.userDBController = {
                         "myFavorites": req.body.myFavorites
                     });
                     newUser.save()
-                        .then(docs => { 
-                            const token = jwt.sign({ id:docs.id }, "jwtSecret");
+                        .then(docs => {
+                            const token = jwt.sign({ id: docs.id }, "jwtSecret");
                             res.cookie('token', token, { maxAge: 6000000 });
-                            res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email 
-                            }) })
+                            res.json({
+                                id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email
+                            })
+                        })
                         .catch(err => console.log(`Error getting the data from DB: ${err}`));
                 }
             })
