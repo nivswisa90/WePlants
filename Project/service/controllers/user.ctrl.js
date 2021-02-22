@@ -124,21 +124,28 @@ exports.userDBController = {
             res.send('Authentication error');
         }
         else {
-            Plant.findOne({ id: parseInt(req.query.plantId) })
+            User.findOne({id:parseInt(userId)})
                 .then(docs => {
-                    User.findOneAndUpdate({ id: userId }, {
-                        $push: {
-                            "myFavorites": {
-                                id: docs.id, plantName: docs.plantName, description: docs.description,
-                                imageUrl: docs.imageUrl, date: moment().format("YYYY-MM-DD"), wayOfCare: docs.wayOfCare
+                    const max = docs.myFavorites.reduce((prev, curr) => prev = prev > curr.id ? prev : curr.id, 0);
+                    Plant.findOne({ id: parseInt(req.query.plantId) })
+                    .then(docs => {
+                        User.findOneAndUpdate({ id: userId }, {
+                            $push: {
+                                "myFavorites": {
+                                    id: max+1, plantName: docs.plantName, description: docs.description,
+                                    imageUrl: docs.imageUrl, date: moment().format("YYYY-MM-DD"), wayOfCare: docs.wayOfCare
+                                }
                             }
-                        }
-                    },
-                        { new: true })
-                        .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
-                        .catch(err => console.log(err));
+                        },
+                            { new: true })
+                            .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
+                            .catch(err => console.log(err));
+                    })
+                    .catch(err => console.log(err));
+                
                 })
                 .catch(err => console.log(err));
+           
         }
     },
 
