@@ -42,7 +42,13 @@ exports.plantDBController = {
       const index = Plant.findOne({}).sort({_id: -1}).limit(1);
       resolve(index);
     });
-    console.log(req.body);
+    
+    const wayOfCare = {
+      light: req.body.light,
+      water: req.body.water,
+      feed: req.body.feed,
+      temperature: req.body.temperature
+    }
 
     Plant.countDocuments(
       {
@@ -61,13 +67,13 @@ exports.plantDBController = {
             imageUrl: req.body.imageUrl,
             family: req.body.family,
             description: req.body.description,
-            wayOfCare: req.body.wayOfCare,
+            wayOfCare: wayOfCare,
           });
 
           newPlant
             .save()
             .then((docs) => {
-              res.json('Succesfully added plant!');
+              res.json('Successfully added plant!');
             })
             .catch((err) =>
               console.log(`Error getting the data from DB: ${err}`)

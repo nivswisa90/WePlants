@@ -6,7 +6,8 @@ const favoritesSchema = new Schema({
     plantName: {type: String, required: true},
     description: {type: String},
     imageUrl: {type: String},
-    date: {type: String}
+    date: {type: String},
+    wayOfCare: {type: Array}
 });
 
 const userSchema = new Schema({
