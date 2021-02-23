@@ -13,8 +13,8 @@ exports.mailDBController = {
 
         // mail from user to admin to suggest a plant
         const suggestionMail = {
-            from: process.env.GMAIL_USER,
-            to: req.body.email,
+            from: req.body.email,
+            to: process.env.GMAIL_USER,
             subject: 'New plant request',
             text: `Hey dude!                                                                                            
              I didn't found the plant ${req.body.plantName},
