@@ -3,7 +3,9 @@ const Plant = require('../models/plants');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const { writeBackLog } = require('../logs/logs');
 
+// if token exist return id and user get authentication
 const getUserId = (req, res) => {
     const token = req.cookies.token;
 
@@ -33,19 +35,19 @@ exports.userDBController = {
                     const lastName = docs.lastName;
                     const myFavorites = docs.myFavorites;
                     const email = docs.email;
+                    writeBackLog(`User ${id} successfully get info`);
                     res.json({ id, role, firstName, lastName, myFavorites, email });
                 })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                .catch(err => writeBackLog(`Error getting the data from DB: ${err}`));
         }
         else {
             User.find({})
                 .then(docs => res.send(docs))
-                .catch(err => console.log(err));
+                .catch(err => writeBackLog(err));
         }
     },
     getUser(req, res) {
         const id = getUserId(req, res);
-
         if (id != parseInt(req.params.id)) {
             res.send('Authentication error');
         } else {
@@ -58,7 +60,7 @@ exports.userDBController = {
                     const email = docs.email;
                     res.json({ id, role, firstName, lastName, myFavorites, email });
                 })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                .catch(err => writeBackLog(`Error getting the data from DB: ${err}`));
         }
     },
     async addUser(req, res) {
@@ -84,15 +86,15 @@ exports.userDBController = {
                     newUser.save()
                         .then(docs => {
                             const token = jwt.sign({ id: docs.id }, "jwtSecret");
-                            res.cookie('token', token, { maxAge: 6000000, sameSite: 'none', secure: true});
+                            res.cookie('token', token, { maxAge: 6000000, sameSite: 'none', secure: true, path: '/' });
                             res.json({
                                 id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email
                             })
                         })
-                        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                        .catch(err => writeBackLog(`Error getting the data from DB: ${err}`));
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => writeBackLog(err));
     },
 
     async login(req, res) {
@@ -106,19 +108,18 @@ exports.userDBController = {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
                         res.cookie('token', token, { maxAge: 6000000, sameSite: 'none', secure: true });
+                        writeBackLog(`Successfully log in to user ${id}`);
                         res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email });
                     }
                 }
                 else {
                     res.json('User does not exist');
                 }
-
             })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+            .catch(err => writeBackLog(`Error getting the data from DB: ${err}`));
     },
     async updateUserOrAddToFavorites(req, res) {
         const userId = getUserId(req, res);
-
         if (userId != parseInt(req.params.id)) {
             res.send('Authentication error');
         }
@@ -138,27 +139,25 @@ exports.userDBController = {
                             },
                                 { new: true })
                                 .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
-                                .catch(err => console.log(err));
+                                .catch(err => writeBackLog(err));
                         })
-                        .catch(err => console.log(err));
-
+                        .catch(err => writeBackLog(err));
                 })
-                .catch(err => console.log(err));
+                .catch(err => writeBackLog(err));
         }
     },
 
     deleteUserOrFavoritePlant(req, res) {
         const userId = getUserId(req, res);
-
         if (userId == parseInt(req.params.id) && req.query.plantId) {
             User.findOneAndUpdate({ id: userId }, { $pull: { "myFavorites": { id: parseInt(req.query.plantId) } } }, { new: true })
                 .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
-                .catch(err => console.log(err));
+                .catch(err => writeBackLog(err));
         }
         else {
             User.findOneAndDelete({ id: parseInt(req.params.id) })
                 .then(docs => { res.json(docs) })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+                .catch(err => writeBackLog(`Error getting the data from DB: ${err}`));
         }
     }
 };

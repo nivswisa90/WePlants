@@ -5,6 +5,7 @@ exports.plantDBController = {
     if (req.query.name) {
       const plantName = req.query.name;
 
+      //fund plant by name or family name
       Plant.find({
         $or: [
           {

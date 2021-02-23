@@ -1,7 +1,7 @@
-const { text } = require('express');
 const nodemailer = require('nodemailer');
 
 exports.mailDBController = {
+    // function to send create transport mail and authenticate
     sendMail(req, res) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -11,6 +11,7 @@ exports.mailDBController = {
             }
         });
 
+        // mail from user to admin to suggest a plant
         const suggestionMail = {
             from: process.env.GMAIL_USER,
             to: req.body.email,
@@ -21,6 +22,7 @@ exports.mailDBController = {
              Thanks!`
         };
 
+        // notification from system to user, watering plant
         const wateringMail = {
             from: process.env.GMAIL_USER,
             to: req.body.email,
