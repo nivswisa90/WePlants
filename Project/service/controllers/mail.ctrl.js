@@ -25,21 +25,22 @@ exports.mailDBController = {
             from: process.env.GMAIL_USER,
             to: req.body.email,
             subject: 'Water advice',
-            text: 
-            `Hey ${req.body.firstName}! 
+            text:
+                `Hey ${req.body.firstName}! 
             Time to watering plants! The plant ${req.body.plantName} is thirsty, here is our recommendation for watering ${req.body.plantName}:
             ${req.body.water}!`
         }
 
-        // const mailOptions = (option) => {
-        //     transporter.sendMail(option, function (error, info) {
-        //         if (error) {
-        //             console.log(error);
-        //         } else {
-        //             console.log('Email sent: ' + info.response);
-        //         }
-        //     });
-        // }
+        const mailOptions = (option) => {
+            transporter.sendMail(option, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+        }
+
         switch (req.body.type) {
             case 'suggestion':
                 mailOptions(suggestionMail);
@@ -52,5 +53,4 @@ exports.mailDBController = {
 
         res.json('Email sent successfully');
     }
-
 }

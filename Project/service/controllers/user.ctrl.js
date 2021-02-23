@@ -6,6 +6,7 @@ const moment = require('moment');
 
 const getUserId = (req, res) => {
     const token = req.cookies.token;
+
     let id;
     if (!token) {
         return;
@@ -59,7 +60,6 @@ exports.userDBController = {
                 })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
-
     },
     async addUser(req, res) {
         User.findOne({ email: req.body.email })
@@ -84,7 +84,7 @@ exports.userDBController = {
                     newUser.save()
                         .then(docs => {
                             const token = jwt.sign({ id: docs.id }, "jwtSecret");
-                            res.cookie('token', token, { maxAge: 6000000 });
+                            res.cookie('token', token, { maxAge: 6000000, sameSite: 'none', secure: true});
                             res.json({
                                 id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email
                             })
@@ -93,7 +93,6 @@ exports.userDBController = {
                 }
             })
             .catch(err => console.log(err));
-
     },
 
     async login(req, res) {
@@ -106,7 +105,7 @@ exports.userDBController = {
                     else {
                         const id = docs.id;
                         const token = jwt.sign({ id }, "jwtSecret");
-                        res.cookie('token', token, { maxAge: 6000000 });
+                        res.cookie('token', token, { maxAge: 6000000, sameSite: 'none', secure: true });
                         res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email });
                     }
                 }
@@ -124,28 +123,27 @@ exports.userDBController = {
             res.send('Authentication error');
         }
         else {
-            User.findOne({id:parseInt(userId)})
+            User.findOne({ id: parseInt(userId) })
                 .then(docs => {
                     const max = docs.myFavorites.reduce((prev, curr) => prev = prev > curr.id ? prev : curr.id, 0);
                     Plant.findOne({ id: parseInt(req.query.plantId) })
-                    .then(docs => {
-                        User.findOneAndUpdate({ id: userId }, {
-                            $push: {
-                                "myFavorites": {
-                                    id: max+1, plantName: docs.plantName, description: docs.description,
-                                    imageUrl: docs.imageUrl, date: moment().format("YYYY-MM-DD"), wayOfCare: docs.wayOfCare
+                        .then(docs => {
+                            User.findOneAndUpdate({ id: userId }, {
+                                $push: {
+                                    "myFavorites": {
+                                        id: max + 1, plantName: docs.plantName, description: docs.description,
+                                        imageUrl: docs.imageUrl, date: moment().format("YYYY-MM-DD"), wayOfCare: docs.wayOfCare
+                                    }
                                 }
-                            }
-                        },
-                            { new: true })
-                            .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
-                            .catch(err => console.log(err));
-                    })
-                    .catch(err => console.log(err));
-                
+                            },
+                                { new: true })
+                                .then(docs => res.json({ id: docs.id, role: docs.role, firstName: docs.firstName, lastName: docs.lastName, myFavorites: docs.myFavorites, email: docs.email }))
+                                .catch(err => console.log(err));
+                        })
+                        .catch(err => console.log(err));
+
                 })
                 .catch(err => console.log(err));
-           
         }
     },
 
